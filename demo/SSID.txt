@@ -1,0 +1,9 @@
+
+"Founder's Pad",on,54
+"Hackerspace",on,67
+
+"Eric's Wifi",on,95
+"Mark's Wifi",on,23
+"My Home Wifi",off,81
+"Walmart's Secret Wifi Center",on,12
+"Good Inc",on,98
