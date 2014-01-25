@@ -7,7 +7,7 @@
   margin-left: -250px;
   left: 250px;
   width: 250px;
-  background: url("../images/main-background-bg.png");
+  background: #000;
   position: fixed;
   height: 100%;
   overflow-y: auto;
@@ -34,7 +34,7 @@
 }
 
 .sidebar-nav li a {
-  color: #ffffff;
+  color: #999999;
   display: block;
   text-decoration: none;
 }
@@ -114,10 +114,4 @@
   padding: 15px;
 }
 
-}
-
-.snack {
-    font-size: 31px;
-    font-weight: 400;
-    font-family: "Andale Mono", AndaleMono, monospace;
 }
