@@ -163,7 +163,7 @@
 .panel-tabs > li.active > a,
 .panel-tabs > li.active > a:hover,
 .panel-tabs > li.active > a:focus {
-    color: #fff;
+    color: #ffffff;
     cursor: default;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
