@@ -22,16 +22,22 @@
 		$fields_with_lengths = array('fID' => 30, 'petName' => 30);
 		$errors = array_merge($errors, check_max_field_lengths($fields_with_lengths, $_POST));
 
-		$fID = trim(mysql_prep($_POST['fID']));
-		$Name = trim(mysql_prep($_POST['petName']));
+		$fID = trim(($_POST['fID']));
+		$Name = trim(($_POST['petName']));
 		$feederAttach = "'s Feeder";
 		$petName = $Name . $feederAttach;
 		//echo $petName;
-		$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
-		$arow = mysqli_fetch_assoc($userID);
+		//$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
+		$userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
+		$userID->execute(array($_SESSION['email']));
+		//$arow = mysqli_fetch_assoc($userID);
+		$arow = $userID->fetchAll(PDO::FETCH_ASSOC);
+		
 		if ( empty($errors) ) {
-			$query = "INSERT INTO Feeders (fID, petName, userID) VALUES ('".$fID."','".mysql_real_escape_string($Name)."','".$arow['userID']."')";
-			$result = mysqli_query($connection, $query);
+			//$query = "INSERT INTO Feeders (fID, petName, userID) VALUES ('".$fID."','".mysql_real_escape_string($Name)."','".$arow['userID']."')";
+			$query = $connection->prepare("INSERT INTO Feeders (fID, petName, userID) VALUES(:fID, :petName, :userID)");
+			$result = $query->execute(array(':fID' => $fID, ':petName' => $Name, ':userID' => $arow[0]['userID']));
+			//$result = mysqli_query($connection, $query);
 			echo $result;
 			if ($result) {
 				$message = "The feeder was successfully created.";
@@ -158,33 +164,47 @@ function pushCommand(fID, commandF) {
 			<?php
 				//grab all data relevant to schedules that needs to be displayed, and dynamically add it into table format on the webpage
 				$numSchedules = 0;
-				$userID = mysqli_query($connection,"SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
-				$arow = mysqli_fetch_array($userID);
-				$feederName = mysqli_query($connection,"SELECT petName,fID FROM Feeders WHERE userID='".mysql_real_escape_string($arow['userID'])."'");
-				$numFeeders = mysqli_num_rows($feederName);
+				//$userID = mysqli_query($connection,"SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
+				$userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
+				$userID->execute(array($_SESSION['email']));
+				//$arow = mysqli_fetch_array($userID);
+				$arow = $userID->fetchAll(PDO::FETCH_ASSOC);
+				//$feederName = mysqli_query($connection,"SELECT petName,fID FROM Feeders WHERE userID='".mysql_real_escape_string($arow['userID'])."'");
+				//$numFeeders = mysqli_num_rows($feederName);
+				$feederName = $connection->prepare("SELECT petName,fID FROM Feeders WHERE userID=?");
+				$feederName->execute(array($arow[0]['userID']));
+				$numFeeders = $feederName->rowCount();
+				//echo $numFeeders;
 				$feeders = array();
 				$i = $j = $k = $x = $l = 0;
 				$feederID1 = array();
 				$feederID2 = array();
 				$snames = array();
-				$scheduleID = mysqli_query($connection,"SELECT sID,scheduleName,fID,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Everyday,aTime,AMPM,amountFed FROM Schedules WHERE userID ='".mysql_real_escape_string($arow['userID'])."'");
+				//$scheduleID = mysqli_query($connection,"SELECT sID,scheduleName,fID,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Everyday,aTime,AMPM,amountFed FROM Schedules WHERE userID ='".mysql_real_escape_string($arow['userID'])."'");
+				$scheduleID = $connection->prepare("SELECT sID,scheduleName,fID,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Everyday,aTime,AMPM,amountFed FROM Schedules WHERE userID=?");
+				$scheduleID->execute(array($arow[0]['userID']));
 				if($scheduleID != False){
-					$numSchedules = mysqli_num_rows($scheduleID);
+					//$numSchedules = mysqli_num_rows($scheduleID);
+					$numSchedules = $scheduleID->rowCount();
+					//echo $numSchedules;
 				}
 				$days = array();
 				$ampm = array();
 				$times = array();
 				$amountFed = array();
-				  while($row1 = mysqli_fetch_array($feederName)){
+				  while($row1 = $feederName->fetch(PDO::FETCH_ASSOC)/*mysqli_fetch_array($feederName)*/){
 					$feeders[$i] = stripslashes($row1['petName'] . "'s Feeder");
 					$feederID1[$i] = $row1['fID'];
 					$i++;
 				  }
+				  //might have to do for loops instead of whiles. or for each. seems to be an issue with numfeeders/numschedules and lines in error.
 				  if($numSchedules != 0){
-				  while($row2 = mysqli_fetch_array($scheduleID)){
+				  while($row2 = $scheduleID->fetch(PDO::FETCH_ASSOC)/*mysqli_fetch_array($scheduleID)*/){
+					//echo $row2['scheduleName'];
 					$snames[$j] = stripslashes($row2['scheduleName']);
 					$sIDs[$j] = $row2['sID'];
 					$feederID2[$j] = $row2['fID'];
+					//echo $feederID2[0];
 					$am_and_pm = $row2['AMPM'];
 					//$pm = $row2['PM'];
 					$amount = $row2['amountFed'];
@@ -347,7 +367,9 @@ echo "<span style='width:100px; height:100px; border:grey 2px solid; display: ta
 			Are you sure you want to delete this schedule?<br>
 			<button>Yes</button>&nbsp&nbsp<button>No</button>
 			 ";*/
-			mysqli_query($connection, "DELETE FROM Schedules WHERE sID='".mysql_real_escape_string($sIDs[$g])."'");
+			//mysqli_query($connection, "DELETE FROM Schedules WHERE sID='".mysql_real_escape_string($sIDs[$g])."'");
+			$deleteSch = $connection->prepare("DELETE FROM Schedules WHERE sID=?");
+			$deleteSch->execute(array($sIDs[$g]));
 /* CHANGE THIS AS NEEDED */header("Location: logged_in.php");
 		}
 	}
