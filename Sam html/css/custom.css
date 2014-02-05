@@ -1,0 +1,104 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+.p1
+{
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: 300;
+	font-size: 50px;
+	line-height: 50px;
+}
+
+.p2
+{
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: 600;
+	font-size: 50px;
+	line-height: 50px;
+}
+
+.p3
+{
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: 300;
+	font-size: 30px;
+	line-height: 30px;
+}
+
+.p4
+{
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: 300;
+	font-size: 20px;
+	line-height: 15px;
+}
+
+.b
+{
+	background-color: white;
+}
+
+.absolute
+{
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	max-width: 700px;
+	max-height: 700px;
+	height: 400px;
+	left: 0;
+	right: 0;
+	top: 25%;
+	bottom:25%;
+	text-align: center;
+	background-color: rgba(0,0,0,.1);
+}
+
+.absolute2
+{
+	position: fixed;
+	height: 200px;
+	left: 50%;
+	right:50%;
+	top: 80%;
+	text-align: center;
+}
+
+.logoposition
+{
+	position: absolute;
+	left: 5%;
+	top: 5%;
+}
+
+#pager {
+  /* you can add positioning properties here if needed */
+  width: 300px;  change as required 
+  padding: 0;
+  border-top: 1px;
+  border-bottom: 1px;
+  z-index: 999;
+}
+
+#pager a {
+  display: block;
+  float: left;
+  width: 10px;
+  height: 10px;
+  text-indent: -999em;
+  background: #fff;
+  border-radius: 10px; /* must be the same as width and height */
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  box-shadow: 0 0 1px 1px #707173; /* border color */
+  margin-right: 10px;
+}
+
+#pager a {
+  background: #c0c0c0; /* optional: color when hovered */
+}
+
+#pager a.activeSlide {
+  background: #707173; /* color when active */
+}
