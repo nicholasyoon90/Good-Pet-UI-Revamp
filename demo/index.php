@@ -11,14 +11,18 @@ require_once("includes/PasswordHash.php"); ?>
 	}
 	*/
 	//if(isset($_SESSION['email'])){
-	$remd = mysqli_query($connection, "SELECT remid,email FROM Users");
-	while($remrow = mysqli_fetch_array($remd)){
+	//$remd = mysqli_query($connection, "SELECT remid,email FROM Users");
+	$remd = $connection->query("SELECT remid,email FROM Users");
+	//while($remrow = $remd->fetchAll(PDO::FETCH_ASSOC)/*mysqli_fetch_array($remd)*/){
+	foreach ($remd as $remrow) {
 		if (isset($_COOKIE['TKC'])) {
 			if ($_COOKIE['TKC'] == $remrow['remid'])
 			{
 				//echo $_COOKIE["TKC"];
 				$tk = uniqid($remrow['email'],true);
-				mysqli_query($connection,"UPDATE Users SET remid ='".$tk."' WHERE email ='".$remrow['email']."'");
+				//mysqli_query($connection,"UPDATE Users SET remid ='".$tk."' WHERE email ='".$remrow['email']."'");
+				$updateRem = $connection->prepare("UPDATE Users SET remid=? WHERE email=?");
+				$updateRem->execute(array($tk, $remrow['email']));
 				setcookie("TKC", $tk, time()+31557600, "/", false, false, true); 
 				$_SESSION['email'] = $remrow['email'];
 				redirect_to("logged_in.php");
@@ -39,13 +43,17 @@ require_once("includes/PasswordHash.php"); ?>
 		$fields_with_lengths = array('email' => 32, 'password' => 72);
 		$errors = array_merge($errors, check_max_field_lengths($fields_with_lengths, $_POST));
 		// we are using an email and password for login verification, password goes through hashing algorithms as seen in PasswordHash.php
-		$email = trim(mysql_prep($_POST['email']));
-		$password = trim(mysql_prep($_POST['password']));
+		$email = trim($_POST['email']);
+		$password = trim($_POST['password']);
 		$stored_hash="*";
-		$storage = mysqli_query($connection,"SELECT email, hashed_password FROM Users WHERE email='".$email."'");
-		$prow = mysqli_fetch_array($storage);
-		$stored_hash = $prow['hashed_password'];
-		
+		//$storage = mysqli_query($connection,"SELECT email, hashed_password FROM Users WHERE email='".$email."'");
+		$storage = $connection->prepare("SELECT email, hashed_password FROM Users WHERE email=?");
+		$storage->execute(array($email));
+		//$prow = mysqli_fetch_array($storage);
+		$prow = $storage->fetchAll(PDO::FETCH_ASSOC);
+		if($prow != false)
+			$stored_hash = $prow[0]['hashed_password'];
+		//echo $stored_hash;
 		$check = $hasher->CheckPassword($password,$stored_hash);
 		
 		
@@ -58,10 +66,12 @@ require_once("includes/PasswordHash.php"); ?>
 				$tk = uniqid($email,true);
 				//echo $tk;
 				//insert into users, $tk.
-				mysqli_query($connection,"UPDATE Users SET remid ='".$tk."' WHERE email ='".$email."'");
+				//mysqli_query($connection,"UPDATE Users SET remid ='".$tk."' WHERE email ='".$email."'");
+				$updateC = $connection->prepare("UPDATE Users SET remid=? WHERE email=?");
+				$updateC->execute(array($tk, $email));
 				setcookie("TKC", $tk, time()+31557600, "/", false, false, true); 
 			}
-			$_SESSION['email'] = $prow['email'];
+			$_SESSION['email'] = $prow[0]['email'];
 			redirect_to("logged_in.php");
 		}
 		else {

@@ -20,7 +20,7 @@ define("HASH_PBKDF2_INDEX", 3);
 		if( $new_enough_php ) { // PHP v4.3.0 or higher
 			// undo any magic quote effects so mysql_real_escape_string can do the work
 			if( $magic_quotes_active ) { $value = stripslashes( $value ); }
-			$value = mysql_real_escape_string( $value );
+			//$value = mysql_real_escape_string( $value );
 		} else { // before PHP v4.3.0
 			// if magic quotes aren't already on then add slashes manually
 			if( !$magic_quotes_active ) { $value = addslashes( $value ); }

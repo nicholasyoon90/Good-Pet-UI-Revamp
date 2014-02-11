@@ -18,10 +18,10 @@ require_once("includes/PasswordHash.php"); ?>
 		$errors = array_merge($errors, check_max_field_lengths($fields_with_lengths, $_POST));
 
 		//$username = trim(mysql_prep($_POST['username']));
-		$password = trim(mysql_prep($_POST['password']));
-		$password2 = trim(mysql_prep($_POST['password2']));
-		$email = trim(mysql_prep($_POST['email']));
-		$fname = trim(mysql_prep($_POST['fname']));
+		$password = trim($_POST['password']);
+		$password2 = trim($_POST['password2']);
+		$email = trim($_POST['email']);
+		$fname = trim($_POST['fname']);
 		$hash = $hasher->HashPassword($password);
 		//$hashed_password = create_hash($password);
 		//$_SESSION['goodHash'] = create_hash(
@@ -29,12 +29,14 @@ require_once("includes/PasswordHash.php"); ?>
 
 		if ( empty($errors) && ($password == $password2) ) {
 		// insert the account info into the DB
-			$query = "INSERT INTO Users (
+			/*$query = "INSERT INTO Users (
 							email, hashed_password, fname
 						) VALUES (
 							'{$email}', '{$hash}', '{$fname}'
 						)";
-			$result = mysqli_query($connection, $query);
+			$result = mysqli_query($connection, $query);*/
+			$query = $connection->prepare("INSERT INTO Users(email, hashed_password, fname) VALUES(:email, :hash, :fname)");
+			$result = $query->execute(array(':email' => $email, ':hash' => $hash, ':fname' => $fname));
 			//if the insert was successful, store this message to be displayed
 			if ($result) {
 				$message = "The account was successfully created.";
@@ -74,18 +76,21 @@ require_once("includes/PasswordHash.php"); ?>
 		$fields_with_lengths = array('email2' => 32, 'password2' => 72);
 		$errors = array_merge($errors, check_max_field_lengths($fields_with_lengths, $_POST));
 
-		$email2 = trim(mysql_prep($_POST['email2']));
-		$password2 = trim(mysql_prep($_POST['password2']));
+		$email2 = trim(($_POST['email2']));
+		$password2 = trim(($_POST['password2']));
 		$stored_hash="*";
-		$storage = mysqli_query($connection,"SELECT email, hashed_password FROM Users WHERE email='".$email2."'");
-		$prow = mysqli_fetch_array($storage);
-		$stored_hash = $prow['hashed_password'];
+		//$storage = mysqli_query($connection,"SELECT email, hashed_password FROM Users WHERE email='".$email2."'");
+		$storage = $connection->prepare("SELECT email, hashed_password FROM Users WHERE email=?");
+		$storage->execute(array($email2));
+		//$prow = mysqli_fetch_array($storage);
+		$prow = $storage->fetchAll(PDO::FETCH_ASSOC);
+		$stored_hash = $prow[0]['hashed_password'];
 		
 		$check = $hasher->CheckPassword($password2,$stored_hash);
 		//$good_hash = create_hash($password2);
 		//$hashed_password = validate_password($password, $good_hash);
 		if($check) {
-			$_SESSION['email'] = $prow['email'];
+			$_SESSION['email'] = $prow[0]['email'];
 			redirect_to("logged_in.php");
 		}
 		else {

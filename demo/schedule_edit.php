@@ -5,15 +5,24 @@
  //include("includes/header.php"); ?>
   <?php
 $sID = $_SESSION['editSchedID'];
-$sIDresult = mysqli_query($connection, "SELECT fID,scheduleName,Everyday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,aTime,AMPM,amountFed FROM Schedules WHERE sID='".mysql_real_escape_string($sID)."'");
-$sIDrow = mysqli_fetch_assoc($sIDresult);
-$petName = mysqli_query($connection, "SELECT petName FROM Feeders WHERE fID='".mysql_real_escape_string($sIDrow['fID'])."'");
-$frow = mysqli_fetch_assoc($petName);
-$feederName = $frow['petName']."'s Feeder";
+//$sIDresult = mysqli_query($connection, "SELECT fID,scheduleName,Everyday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,aTime,AMPM,amountFed FROM Schedules WHERE sID='".mysql_real_escape_string($sID)."'");
+$sIDresult = $connection->prepare("SELECT fID,scheduleName,Everyday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,aTime,AMPM,amountFed FROM Schedules WHERE sID=?");
+$sIDresult->execute(array($sID));
+//$sIDrow = mysqli_fetch_assoc($sIDresult);
+$sIDrow = $sIDresult->fetchAll(PDO::FETCH_ASSOC);
+//$petName = mysqli_query($connection, "SELECT petName FROM Feeders WHERE fID='".mysql_real_escape_string($sIDrow['fID'])."'");
+$petName = $connection->prepare("SELECT petName FROM Feeders WHERE fID=?");
+$petName->execute(array($sIDrow[0]['fID']));
+//$frow = mysqli_fetch_assoc($petName);
+$frow = $petName->fetchAll(PDO::FETCH_ASSOC);
+$feederName = $frow[0]['petName']."'s Feeder";
 	if(isset($_POST['formSubmit']))
 	{
-		$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
-		$urow = mysqli_fetch_assoc($userID);
+		//$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
+		$userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
+		$userID->execute(array($_SESSION['email']));
+		//$urow = mysqli_fetch_assoc($userID);
+		$urow = $userID->fetchAll(PDO::FETCH_ASSOC);
 		if(isset($_POST['scheduleName'])){
 			$scheduleName = htmlspecialchars(stripslashes($_POST['scheduleName']), ENT_QUOTES);
 		}
@@ -97,7 +106,9 @@ $feederName = $frow['petName']."'s Feeder";
 					$boolM = $boolT = $boolW = $boolTh = $boolF = $boolSa = $boolSu = false;
 				}
 			}
-			mysqli_query($connection,"UPDATE Schedules SET scheduleName='".$scheduleName."', Monday='".$boolM."', Tuesday='".$boolT."', Wednesday='".$boolW."', Thursday='".$boolTh."', Friday='".$boolF."', Saturday='".$boolSa."', Sunday='".$boolSu."', Everyday='".$boolE."', aTime='".$aTime."', AMPM='".$ampm."', amountFed='".$amountFed."' WHERE sID='".$sID."'");
+			//mysqli_query($connection,"UPDATE Schedules SET scheduleName='".$scheduleName."', Monday='".$boolM."', Tuesday='".$boolT."', Wednesday='".$boolW."', Thursday='".$boolTh."', Friday='".$boolF."', Saturday='".$boolSa."', Sunday='".$boolSu."', Everyday='".$boolE."', aTime='".$aTime."', AMPM='".$ampm."', amountFed='".$amountFed."' WHERE sID='".$sID."'");
+			$schUpd = $connection->prepare("UPDATE Schedules SET scheduleName=?, Monday=?, Tuesday=?, Wednesday=?, Thursday=?, Friday=?, Saturday=?, Sunday=?, Everyday=?, aTime=?, AMPM=?, amountFed=? WHERE sID=?");
+			$schUpd->execute(array($scheduleName, $boolM, $boolT, $boolW, $boolTh, $boolF, $boolSa, $boolSu, $boolE, $aTime, $ampm, $amountFed, $sID));
 			header('Refresh: 2; URL=/demo/logged_in.php');
 			echo "<p>The schedule was updated successfully, you will be redirected to the managing page in a moment.</p>";
 		}
@@ -134,7 +145,7 @@ $feederName = $frow['petName']."'s Feeder";
  <div class="span6 offset4">
   <label class="control-label" for="scheduleName">Schedule Name :</label>
   <div class="controls">
-   <input type="text" size="30" maxlength="30" name="scheduleName" value="<?php echo $sIDrow['scheduleName'];?>">
+   <input type="text" size="30" maxlength="30" name="scheduleName" value="<?php echo $sIDrow[0]['scheduleName'];?>">
 </div>
 </div>
 </div>
@@ -146,7 +157,7 @@ $feederName = $frow['petName']."'s Feeder";
     <div class="controls">
      <select name='Amount'>
 	 <?php
-			$oldAmount = $sIDrow['amountFed'];
+			$oldAmount = $sIDrow[0]['amountFed'];
 			$amo = '';
 					if($oldAmount == 0.25) {
 						$amo = '1/4';
@@ -345,7 +356,7 @@ $feederName = $frow['petName']."'s Feeder";
    Select a New Feeding Time:
  <select name="Hour">
  <?php
-	$oldTime = $sIDrow['aTime'];
+	$oldTime = $sIDrow[0]['aTime'];
 	$explTime = explode(":", $oldTime);
 	if($explTime[0] == 1)
 	{
@@ -585,7 +596,7 @@ $feederName = $frow['petName']."'s Feeder";
 
  <label class="radio inline">
  <?php
-  $oldAMPM = $sIDrow['AMPM'];
+  $oldAMPM = $sIDrow[0]['AMPM'];
   if($oldAMPM == 0)
   {
 	echo '<input type="radio" name="am_pm" value="AM" checked="checked">';
@@ -599,7 +610,7 @@ $feederName = $frow['petName']."'s Feeder";
 </label>
 <label class="radio inline">
  <?php
-  $oldAMPM = $sIDrow['AMPM'];
+  $oldAMPM = $sIDrow[0]['AMPM'];
   if($oldAMPM == 1)
   {
 	echo '<input type="radio" name="am_pm" value="PM" checked="checked">';
