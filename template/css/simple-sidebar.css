@@ -15,6 +15,17 @@
   transition: all 0.4s ease 0s;
 }
 
+/*sidebar bottom justificaiton using div-id relationship*/
+#sidebar-bottom {
+  position: fixed; 
+  font-family: "Andale Mono", AndaleMono, monospace;
+  text-align:center;  
+  margin-bottom:60px;  
+  background:#F8F9FC;  
+  border:2px solid #E2E7F5; 
+  padding:30px;}
+}
+
 #page-content-wrapper {
   width: 100%;
 }
