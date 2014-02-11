@@ -7,8 +7,12 @@
 
 		if(isset($_POST['formSubmit']))
 		{
-			$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
-			$urow = mysqli_fetch_assoc($userID);
+			//$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
+			$userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
+			$userID->bindValue(1, $_SESSION['email'], PDO::PARAM_STR);
+			$userID->execute();
+			//$urow = mysqli_fetch_assoc($userID);
+			$urow = $userID->fetchALL(PDO::FETCH_ASSOC);
 			$feederID = $_SESSION['petFeedID'];
 			//echo $feederID;
 			//echo $_POST['PetHealth'];
@@ -42,6 +46,8 @@
 			//echo $petGender; echo $petAge; echo $petWeight; echo $petFoodBrand; echo $petHealth; echo $petFunFact;
 			//mysqli_query($connection, "UPDATE Feeders SET petType='".mysql_real_escape_string($petType)."', petBreed='".mysql_real_escape_string($petBreed)."', petGender='".mysql_real_escape_string($petGender)."', petAgeYears='".$petAge."', petWeightLbs='".$petWeight."', petFoodBrand='".mysql_real_escape_string($petFoodBrand)."', petFunFact='".mysql_real_escape_string($petFunFact)."' WHERE fID='".$feederID."'");
 			mysqli_query($connection, "UPDATE Feeders SET petType='".mysql_real_escape_string($petType)."', petBreed='".mysql_real_escape_string($petBreed)."', petGender='".mysql_real_escape_string($petGender)."', petAgeYears='".$petAge."', petWeightLbs='".$petWeight."', petFoodBrand='".mysql_real_escape_string($petFoodBrand)."', petHealth='".mysql_real_escape_string($petHealth)."' WHERE fID='".$feederID."'");
+			$stmt = $connection->prepare("UPDATE Feeders SET petType=?, petBreed=?, petGender=?, petAgeYears=?, petWeightLbs=?, petFoodBrand=?, petHealth=? WHERE fID=?");		
+			$stmt->execute(array($petType, $petBreed, $petGender, $petAge, $petWeight, $petFoodBrand, $petHealth, $fID));
 			//mysqli_query($connection,"INSERT INTO Schedules(scheduleName, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Everyday, aTime, AMPM, fID, amountFed, userID) VALUES('".$scheduleName."','".$boolM."','".$boolT."','".$boolW."','".$boolTh."','".$boolF."','".$boolSa."','".$boolSu."','".$boolE."','".$aTime."','".$ampm."','".$crow['fID']."','".$amountFed."','".$urow['userID']."')");
 			header('Refresh: 2; URL=logged_in.php');
 			echo "<p>Pet Info saved successfully, you will be redirected to the managing page in a moment.</p>";

@@ -14,7 +14,7 @@ if (!$db_select) {
 }
 */
 try{
-	$connection = new PDO("mysql:host=localhost;dbname=ProjectPet", DB_USER, DB_PASS);
+	$connection = new PDO("mysql:host=localhost;dbname=good_petdb", DB_USER, DB_PASS);
 }
 catch(PDOException $e){
 	echo $e->getMessage();
