@@ -75,6 +75,66 @@
   background: none;
 }
 
+//sidebar bottom menu 
+
+.sidebar-nav2 {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-nav2 li {
+  line-height: 40px;
+  text-indent: 20px;
+}
+
+.sidebar-nav2 li a {
+  color: #ffffff;
+  display: block;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.sidebar-nav2 li a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.23);
+  text-decoration: none;
+}
+
+.sidebar-nav2 li a:active,
+.sidebar-nav2 li a:focus {
+  /*text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,0.23);*/
+  color: #fff;
+    cursor: default;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: rgba(255,255,255, .23);
+    border-bottom-color: transparent;
+}
+
+.sidebar-nav2 > .sidebar-brand {
+  height: 65px;
+  line-height: 60px;
+  font-size: 18px;
+}
+
+.sidebar-nav2 > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav2 > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+//end sidebar2
+
 .content-header {
   height: 65px;
   line-height: 65px;
