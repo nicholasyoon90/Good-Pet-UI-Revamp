@@ -65,6 +65,8 @@
                 <div class="col-md-6">
             <div class="panel panel-good">
                 <div class="panel-heading">
+				
+					<!--NEEDS TO BE ATTACHED TO THE DATABASE OF THE PET NAME NOT BUDDY -->
                     <h3 class="panel-title">BUDDY'S FEEDER</h3>
                     <span class="pull-right">
                         <!-- Tabs -->
@@ -74,31 +76,155 @@
                         </ul>
                     </span>
                 </div>
+				
+				<!--SOMEHOW NEED TO MAKE THE BODY TO THE SIZE OF THE ENTIRE PAGE-->
                 <div class="panel-body">
                     <div class="tab-content">
 
                         <!--form input for schedules-->
                         <div class="tab-pane active" id="tab1">
                             <!--start the form class for input fields-->
-                            <form class="form-horizontal">
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                    NAME <input type="text" class="form-control" id="name">
-                                    </div>
-                                </div>
-                               <br>
-                                <select class="form-control">
-                                    <option>Dog</option>
-                                    <option>Cat</option>
-                                </select>
-                            </form>
+							<section style="margin: 5px;">
+							<fieldset style="min-height:150px;">
+							<legend><b>PET INFO</b></legend>
+							
+								<!--NAME-->
+								<form class="form-horizontal" role="form">
+										<div class="form-group">
+										<label for="name" class="col-sm-2 control-label">NAME</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="name">
+											</div>
+										</div>
+								</form>
+								<br>
+								   
+								   <!--TYPE-->
+								   <form class="form-horizontal" role="form">
+										<div class="form-group">
+										<label for="type" class="col-sm-2 control-label">TYPE</label>
+											<div class="col-sm-10">
+												<select class="form-control">
+													<option>Dog</option>
+													<option>Cat</option>
+													<option>Bird</option>
+												</select>
+											</div>
+										</div>
+									</form>
+									<br>
+									
+									<!--BREED-->
+									<form class="form-horizontal" role="form">
+										<div class="form-group">
+										<label for="type" class="col-sm-2 control-label">BREED</label>
+											<div class="col-sm-10">
+												<select class="form-control">
+													<option>Pomeranian</option>
+													<option>Beagle</option>
+													<option>Maltese</option>
+												</select>
+											</div>
+										</div>
+									</form>
+									<br>
+									
+									<!--GENDER-->
+									<form class="form-horizontal" role="form">
+										<div class="form-group">
+										<label for="type" class="col-sm-2 control-label">GENDER</label>
+											<div class="col-sm-10">
+												<select class="form-control">
+													<option>Male</option>
+													<option>Female</option>
+												</select>
+											</div>
+										</div>
+									</form>
+									<br>
+									
+									<!--AGE-->
+									<form class="form-horizontal" role="form">
+										<div class="form-group">
+										<label for="type" class="col-sm-2 control-label">AGE</label>
+											<div class="col-sm-10">
+												<select class="form-control">
+													<option>1</option>
+													<option>2</option>
+													<option>3</option>
+													<option>4</option>
+													<option>5</option>
+													<option>6</option>
+													<option>7</option>
+													<option>8</option>
+													<option>9</option>
+													<option>10</option>
+													<option>12</option>
+													<option>13</option>
+												</select>
+											</div>
+										</div>
+									</form>
+									<br>
+									
+									
+									<!--WEIGHT-->
+									<form class="form-horizontal" role="form">
+										<div class="form-group">
+										<label for="name" class="col-sm-2 control-label">WEIGHT</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="weight">
+											</div>
+										</div>
+									</form>
+									<br>
+									
+									<!--FOOD BRAND-->
+									<form class="form-horizontal" role="form">
+										<div class="form-group">
+										<label for="type" class="col-sm-2 control-label">TYPE</label>
+											<div class="col-sm-10">
+												<select class="form-control">
+													<option>GoodInc Food</option>
+													<option>Innova Adult</option>
+													<option>Petco Goodies</option>
+												</select>
+											</div>
+										</div>
+									</form>
+									<br>
+									
+									<!--HEALTH-->
+									<form class="form-horizontal" role="form">
+										<div class="form-group">
+										<label for="type" class="col-sm-2 control-label">TYPE</label>
+											<div class="col-sm-10">
+												<select class="form-control">
+													<option>Overweight</option>
+													<option>Healthy</option>
+													<option>Underweight</option>
+												</select>
+											</div>
+										</div>
+									</form>
+									<br>
+									
+							</fieldset>
+							
+							
+							<section style="margin: 0px;">
+							<fieldset style="min-height:150px;">
+							<legend><b>GENERAL PREFERENCES</b></legend>
+							
 
-
+									
+							</fieldset>
+							
                         </div>
 
                         <!--form input for settings-->
                         <div class="tab-pane" id="tab2">
-
+						
 
                         </div>
                     </div>
