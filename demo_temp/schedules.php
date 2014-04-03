@@ -31,7 +31,7 @@
 			}
 			$am = false;
 			$pm = false;
-			$ampm;
+			$ampm = false;
 			if(isset($_POST['Feeders'])){
 				$aFeeder = stripslashes(trim($_POST['Feeders']));
 				$aNameExplode = explode("'", $aFeeder);
@@ -112,7 +112,6 @@
 					}
 				}
 				//mysqli_query($connection,"INSERT INTO Schedules(scheduleName, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Everyday, aTime, AMPM, fID, amountFed, userID) VALUES('".$scheduleName."','".$boolM."','".$boolT."','".$boolW."','".$boolTh."','".$boolF."','".$boolSa."','".$boolSu."','".$boolE."','".$aTime."','".$ampm."','".$crow[$i]['fID']."','".$amountFed."','".$urow['userID']."')");
-				echo $ampm;
 				$schIns = $connection->prepare("INSERT INTO Schedules(scheduleName, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Everyday, aTime, AMPM, fID, amountFed, userID) VALUES(:scheduleName, :boolM, :boolT, :boolW, :boolTh, :boolF, :boolSa, :boolSu, :boolE, :aTime, :ampm, :fID, :amountFed, :userID)");
 				$schIns->execute(array(':scheduleName' => $scheduleName, ':boolM' => $boolM, ':boolT' => $boolT, ':boolW' => $boolW, ':boolTh' => $boolTh, ':boolF' => $boolF, ':boolSa' => $boolSa, ':boolSu' => $boolSu, ':boolE' => $boolE, ':aTime' => $aTime, ':ampm' => $ampm, ':fID' => $crow[0]['fID'], ':amountFed' => $amountFed, ':userID' => $urow[0]['userID']));
 				header('Refresh: 2; URL=logged_in.php');
@@ -161,9 +160,8 @@
 				//$num = mysqli_num_rows($feederName);
 				$num = $feederName->rowCount();
 				$y = 0;
-				$row = $feederName->fetchAll(PDO::FETCH_ASSOC);
-				foreach($row as $row1){//while($row = $feederName->fetchAll(PDO::FETCH_ASSOC)){
-					echo "<option value='".htmlspecialchars(stripslashes($row1['petName'] . "'s Feeder"), ENT_QUOTES)."'>".stripslashes($row1['petName'] . "'s Feeder")."</option>";
+				while($row = $feederName->fetchAll(PDO::FETCH_ASSOC)){
+					echo "<option value='".htmlspecialchars(stripslashes($row[$y]['petName'] . "'s Feeder"), ENT_QUOTES)."'>".stripslashes($row[$y]['petName'] . "'s Feeder")."</option>";
 					$y++;
 				}
   ?>

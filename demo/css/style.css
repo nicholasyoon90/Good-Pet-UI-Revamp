@@ -1,0 +1,30 @@
+html { background: transparent }
+
+.home {
+	background: url('../img/main-background-bg.png');
+}
+
+.good {
+	font-size: 36px;
+	color: #ffffff;
+}
+
+.descrip {
+	color: #ffffff;
+}
+
+.subhead {
+	color: #ffffff;
+	font-size: 24px;
+}
+
+div.logo {
+	width: 408px;
+	height: 200px;
+	background-image: url("../img/GoodPet.png");
+	background-repeat: no-repeat;
+  	margin-right: auto;
+  	margin-left: auto;
+  	margin-top: auto;
+  	padding-top: -75px;
+}

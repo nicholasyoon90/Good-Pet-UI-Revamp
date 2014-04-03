@@ -235,7 +235,7 @@ function RpiConnect {
 <form target="" action="" method="post" id="aForm">
 <div class="row-fluid">
 <div class="span6 offset4">
-<h2 class="text-info"> 4. <input type="button" class="btn btn-large btn-info" name="B1" value="Choose Your WiFi" onClick="WiFiConnect('Rpindex.php','WiFi','640','480','center','front');"> <!--http://192.168.42.2-->
+<h2 class="text-info"> 4. <input type="button" class="btn btn-large btn-info" name="B1" value="Choose Your WiFi" onClick="WiFiConnect('http://192.168.42.2','WiFi','640','480','center','front');">
 </h2>
 </div>
 </div>

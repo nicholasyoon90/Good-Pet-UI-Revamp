@@ -190,27 +190,24 @@ function pushCommand(fID, commandF) {
 				}
 				$days = array();
 				$ampm = array();
-				$am_and_pm = array();
 				$times = array();
 				$amountFed = array();
-				$row1 = $feederName->fetchAll(PDO::FETCH_ASSOC);
-				  foreach($row1 as $row11){//while($row1 = $feederName->fetch(PDO::FETCH_ASSOC)/*mysqli_fetch_array($feederName)*/){
-					$feeders[$i] = stripslashes($row11['petName'] . "'s Feeder");
-					$feederID1[$i] = $row11['fID'];
+				  while($row1 = $feederName->fetch(PDO::FETCH_ASSOC)/*mysqli_fetch_array($feederName)*/){
+					$feeders[$i] = stripslashes($row1['petName'] . "'s Feeder");
+					$feederID1[$i] = $row1['fID'];
 					$i++;
 				  }
 				  //might have to do for loops instead of whiles. or for each. seems to be an issue with numfeeders/numschedules and lines in error.
 				  if($numSchedules != 0){
-				  $row2 = $scheduleID->fetchAll(PDO::FETCH_ASSOC);
-				  foreach($row2 as $row22){//while($row2 = $scheduleID->fetch(PDO::FETCH_ASSOC)/*mysqli_fetch_array($scheduleID)*/){
+				  while($row2 = $scheduleID->fetch(PDO::FETCH_ASSOC)/*mysqli_fetch_array($scheduleID)*/){
 					//echo $row2['scheduleName'];
-					$snames[$j] = stripslashes($row22['scheduleName']);
-					$sIDs[$j] = $row22['sID'];
-					$feederID2[$j] = $row22['fID'];
+					$snames[$j] = stripslashes($row2['scheduleName']);
+					$sIDs[$j] = $row2['sID'];
+					$feederID2[$j] = $row2['fID'];
 					//echo $feederID2[0];
-					$am_and_pm[$j] = $row22['AMPM'];
+					$am_and_pm = $row2['AMPM'];
 					//$pm = $row2['PM'];
-					$amount = $row22['amountFed'];
+					$amount = $row2['amountFed'];
 					$amo = '';
 					if($amount == 0.25) {
 						$amo = '1/4';
@@ -237,9 +234,9 @@ function pushCommand(fID, commandF) {
 						$amo = '2';
 					}
 					$dayString = '';
-					$time = $row22['aTime'];
-					if($row22['Monday'] == 1) {
-						if($row22['Tuesday'] == 1 || $row22['Wednesday'] == 1 || $row22['Thursday'] == 1 || $row22['Friday'] == 1 || $row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+					$time = $row2['aTime'];
+					if($row2['Monday'] == 1) {
+						if($row2['Tuesday'] == 1 || $row2['Wednesday'] == 1 || $row2['Thursday'] == 1 || $row2['Friday'] == 1 || $row2['Saturday'] == 1 || $row2['Sunday'] == 1 ){
 							$dayString .= 'Monday, ';
 						}
 						else{
@@ -247,57 +244,57 @@ function pushCommand(fID, commandF) {
 						}
 					}
 
-					if($row22['Tuesday'] == 1) {
-						if($row22['Wednesday'] == 1 || $row22['Thursday'] == 1 || $row22['Friday'] == 1 || $row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+					if($row2['Tuesday'] == 1) {
+						if($row2['Wednesday'] == 1 || $row2['Thursday'] == 1 || $row2['Friday'] == 1 || $row2['Saturday'] == 1 || $row2['Sunday'] == 1 ){
 							$dayString .= 'Tuesday, ';
 						}
 						else{
 							$dayString .= 'Tuesday';
 						}
 					}
-					if($row22['Wednesday'] == 1) {
-						if($row22['Thursday'] == 1 || $row22['Friday'] == 1 || $row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+					if($row2['Wednesday'] == 1) {
+						if($row2['Thursday'] == 1 || $row2['Friday'] == 1 || $row2['Saturday'] == 1 || $row2['Sunday'] == 1 ){
 							$dayString .= 'Wednesday, ';
 						}
 						else{
 							$dayString .= 'Wednesday';
 						}
 					}
-					if($row22['Thursday'] == 1) {
-						if($row22['Friday'] == 1 || $row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+					if($row2['Thursday'] == 1) {
+						if($row2['Friday'] == 1 || $row2['Saturday'] == 1 || $row2['Sunday'] == 1 ){
 							$dayString .= 'Thursday, ';
 						}
 						else{
 							$dayString .= 'Thursday';
 						}
 					}
-					if($row22['Friday'] == 1) {
-						if($row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+					if($row2['Friday'] == 1) {
+						if($row2['Saturday'] == 1 || $row2['Sunday'] == 1 ){
 							$dayString .= 'Friday, ';
 						}
 						else{
 							$dayString .= 'Friday';
 						}
 					}
-					if($row22['Saturday'] == 1) {
-						if($row22['Sunday'] == 1 ){
+					if($row2['Saturday'] == 1) {
+						if($row2['Sunday'] == 1 ){
 							$dayString .= 'Saturday, ';
 						}
 						else{
 							$dayString .= 'Saturday';
 						}
 					}
-					if($row22['Sunday'] == 1) {
+					if($row2['Sunday'] == 1) {
 						$dayString .= 'Sunday';
 					}
-					if($row22["Everyday"] == 1) {
+					if($row2["Everyday"] == 1) {
 						$dayString .= 'Everyday ';
 					}
 					$times[$j] = $time;
-					if($am_and_pm[$j] == 1){
+					if($am_and_pm == 1){
 						$ampm[$j] = "PM";
 					}
-					else if($am_and_pm[$j] == 0){
+					else if($am_and_pm == 0){
 						$ampm[$j] = "AM";
 					}
 					$days[$j] = $dayString;
@@ -335,7 +332,6 @@ echo "<span style='width:100px; height:100px; border:grey 2px solid; display: ta
 						  <th></th>
 						  </tr>"  ;
 					for($w=0; $w<$numSchedules; $w++){
-						//echo $ampm[$w];
 						if($feederID2[$w] == $feederID1[$q]){
 							echo "<tr class='success'>
 								  <td>".$snames[$w]."</td>

@@ -109,7 +109,7 @@ $feederName = $frow[0]['petName']."'s Feeder";
 			//mysqli_query($connection,"UPDATE Schedules SET scheduleName='".$scheduleName."', Monday='".$boolM."', Tuesday='".$boolT."', Wednesday='".$boolW."', Thursday='".$boolTh."', Friday='".$boolF."', Saturday='".$boolSa."', Sunday='".$boolSu."', Everyday='".$boolE."', aTime='".$aTime."', AMPM='".$ampm."', amountFed='".$amountFed."' WHERE sID='".$sID."'");
 			$schUpd = $connection->prepare("UPDATE Schedules SET scheduleName=?, Monday=?, Tuesday=?, Wednesday=?, Thursday=?, Friday=?, Saturday=?, Sunday=?, Everyday=?, aTime=?, AMPM=?, amountFed=? WHERE sID=?");
 			$schUpd->execute(array($scheduleName, $boolM, $boolT, $boolW, $boolTh, $boolF, $boolSa, $boolSu, $boolE, $aTime, $ampm, $amountFed, $sID));
-			header('Refresh: 2; URL=/revamp/logged_in.php');
+			header('Refresh: 2; URL=/demo/logged_in.php');
 			echo "<p>The schedule was updated successfully, you will be redirected to the managing page in a moment.</p>";
 		}
 	}

@@ -1,11 +1,9 @@
 <?php require_once("includes/session.php"); 
  require_once("includes/connection.php"); 
- require_once("includes/functions.php");
-require_once("includes/PasswordHash.php"); ?>
+ require_once("includes/functions.php"); ?>
 <?php
 	include_once("includes/form_functions.php");
 	$message = '';
-	$hasher = new PasswordHash(8, false);
 	// START FORM PROCESSING
 	if (isset($_POST['submit'])) { // Form has been submitted.
 		$errors = array();
@@ -14,29 +12,25 @@ require_once("includes/PasswordHash.php"); ?>
 		$required_fields = array('password', 'email', 'fname');
 		$errors = array_merge($errors, check_required_fields($required_fields, $_POST));
 
-		$fields_with_lengths = array('email' => 32, 'password' => 72);
+		$fields_with_lengths = array('email' => 30, 'password' => 30);
 		$errors = array_merge($errors, check_max_field_lengths($fields_with_lengths, $_POST));
 
 		//$username = trim(mysql_prep($_POST['username']));
-		$password = trim($_POST['password']);
-		$password2 = trim($_POST['password2']);
-		$email = trim($_POST['email']);
-		$fname = trim($_POST['fname']);
-		$hash = $hasher->HashPassword($password);
-		//$hashed_password = create_hash($password);
-		//$_SESSION['goodHash'] = create_hash(
+		$password = trim(mysql_prep($_POST['password']));
+		$password2 = trim(mysql_prep($_POST['password2']));
+		$email = trim(mysql_prep($_POST['email']));
+		$fname = trim(mysql_prep($_POST['fname']));
+		$hashed_password = create_hash($password);
 		//$message = '';
 
 		if ( empty($errors) && ($password == $password2) ) {
 		// insert the account info into the DB
-			/*$query = "INSERT INTO Users (
+			$query = "INSERT INTO Users (
 							email, hashed_password, fname
 						) VALUES (
-							'{$email}', '{$hash}', '{$fname}'
+							'{$email}', '{$hashed_password}', '{$fname}'
 						)";
-			$result = mysqli_query($connection, $query);*/
-			$query = $connection->prepare("INSERT INTO Users(email, hashed_password, fname) VALUES(:email, :hash, :fname)");
-			$result = $query->execute(array(':email' => $email, ':hash' => $hash, ':fname' => $fname));
+			$result = mysqli_query($connection, $query);
 			//if the insert was successful, store this message to be displayed
 			if ($result) {
 				$message = "The account was successfully created.";
@@ -73,32 +67,15 @@ require_once("includes/PasswordHash.php"); ?>
 		$required_fields = array('email2', 'password2');
 		$errors = array_merge($errors, check_required_fields($required_fields, $_POST));
 
-		$fields_with_lengths = array('email2' => 32, 'password2' => 72);
+		$fields_with_lengths = array('email2' => 30, 'password2' => 30);
 		$errors = array_merge($errors, check_max_field_lengths($fields_with_lengths, $_POST));
 
-		$email2 = trim(($_POST['email2']));
-		$password2 = trim(($_POST['password2']));
-		$stored_hash="*";
-		//$storage = mysqli_query($connection,"SELECT email, hashed_password FROM Users WHERE email='".$email2."'");
-		$storage = $connection->prepare("SELECT email, hashed_password FROM Users WHERE email=?");
-		$storage->execute(array($email2));
-		//$prow = mysqli_fetch_array($storage);
-		$prow = $storage->fetchAll(PDO::FETCH_ASSOC);
-		$stored_hash = $prow[0]['hashed_password'];
-		
-		$check = $hasher->CheckPassword($password2,$stored_hash);
-		//$good_hash = create_hash($password2);
+		$email2 = trim(mysql_prep($_POST['email2']));
+		$password2 = trim(mysql_prep($_POST['password2']));
+		$good_hash = create_hash($password2);
 		//$hashed_password = validate_password($password, $good_hash);
-		if($check) {
-			$_SESSION['email'] = $prow[0]['email'];
-			redirect_to("logged_in.php");
-		}
-		else {
-			$message = "Email/password combination incorrect.<br />
-					Please make sure your caps lock key is off and try again.";
-		}
-//old stuff below
-		/*if ( empty($errors) && $check ) {
+		
+		if ( empty($errors) && (validate_password($password2, $good_hash)) == true) {
 			// Check database to see if email and the hashed password exist there.
 			$query = "SELECT email ";
 			$query .= "FROM Users ";
@@ -113,22 +90,21 @@ require_once("includes/PasswordHash.php"); ?>
 				$found_user = mysqli_fetch_array($result_set);
 				$_SESSION['email'] = $found_user['email'];
 				
-				redirect_to("default_schedule.php");
+				redirect_to("logged_in.php");
 			} else {
 				// email/password combo was not found in the database
 				$message = "Email/password combination incorrect.<br />
 					Please make sure your caps lock key is off and try again.";
 					
 			}
-		} *
-		else {
+		} else {
 			if (count($errors) == 1) {
 				$message = "There was 1 error in the form.";
 			} else {
 				$message = "There were " . count($errors) . " errors in the form.";
 			}
 			
-		}*/
+		}
 		
 	} else { // Form has not been submitted.
 		if (isset($_GET['logout']) && $_GET['logout'] == 1) {
@@ -147,22 +123,6 @@ require_once("includes/PasswordHash.php"); ?>
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
 <link href="css/custom.css" rel="stylesheet" type="text/css" />
-<SCRIPT LANGUAGE='JAVASCRIPT' TYPE='TEXT/JAVASCRIPT'>
-<!--
-var WiFiConnectWindow=null;
-function WiFiConnect(mypage,myname,w,h,pos,infocus){
-
-if (pos == 'random')
-{LeftPosition=(screen.width)?Math.floor(Math.random()*(screen.width-w)):100;TopPosition=(screen.height)?Math.floor(Math.random()*((screen.height-h)-75)):100;}
-else
-{LeftPosition=(screen.width)?(screen.width-w)/2:100;TopPosition=(screen.height)?(screen.height-h)/2:100;}
-settings='width='+ w + ',height='+ h + ',top=' + TopPosition + ',left=' + LeftPosition + ',scrollbars=no,location=no,directories=no,status=no,menubar=no,toolbar=no,resizable=no';WiFiConnectWindow=window.open('',myname,settings);
-if(infocus=='front'){WiFiConnectWindow.focus();WiFiConnectWindow.location=mypage;}
-if(infocus=='back'){WiFiConnectWindow.blur();WiFiConnectWindow.location=mypage;WiFiConnectWindow.blur();}
-
-}
-// -->
-</script>
 </head>
 <body>
 <div class="hero-unit">
@@ -235,8 +195,7 @@ function RpiConnect {
 <form target="" action="" method="post" id="aForm">
 <div class="row-fluid">
 <div class="span6 offset4">
-<h2 class="text-info"> 4. <input type="button" class="btn btn-large btn-info" name="B1" value="Choose Your WiFi" onClick="WiFiConnect('Rpindex.php','WiFi','640','480','center','front');"> <!--http://192.168.42.2-->
-</h2>
+<h2 class="text-info"> 4. <button class="btn btn-large btn-info" onClick="javascript: window.open('Rpindex.php','mywin','left=20,top=20,width=500,height=500,toolbar=0,resizable=1')"><strong>Choose Your WiFi</strong></h1>
 </div>
 </div>
 </form>

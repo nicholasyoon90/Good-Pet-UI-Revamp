@@ -7,11 +7,8 @@
  <?php
 		if(isset($_POST['formSubmit']))
 		{
-			//$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
-			$userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
-			$userID->execute(array($_SESSION['email']));
-			//$urow = mysqli_fetch_assoc($userID);
-			$urow = $userID->fetchAll(PDO::FETCH_ASSOC);
+			$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
+			$urow = mysqli_fetch_assoc($userID);
 			if(isset($_POST['scheduleName'])){
 				$scheduleName = htmlspecialchars(stripslashes($_POST['scheduleName']), ENT_QUOTES);
 			}
@@ -31,15 +28,12 @@
 			}
 			$am = false;
 			$pm = false;
-			$ampm;
+			$ampm = false;
 			if(isset($_POST['Feeders'])){
-				$aFeeder = stripslashes(trim($_POST['Feeders']));
+				$aFeeder = stripslashes(trim(mysql_prep($_POST['Feeders'])));
 				$aNameExplode = explode("'", $aFeeder);
-				//$feederID = mysqli_query($connection,"SELECT fID,feederIP FROM Feeders WHERE petName ='".mysql_real_escape_string($aNameExplode[0])."' AND userID='".$urow['userID']."'");
-				$feederID = $connection->prepare("SELECT fID,feederIP FROM Feeders WHERE petName=? AND userID=?");
-				$feederID->execute(array($aNameExplode[0],$urow[0]['userID']));
-				//$crow = mysqli_fetch_array($feederID);
-				$crow = $feederID->fetchAll(PDO::FETCH_ASSOC);
+				$feederID = mysqli_query($connection,"SELECT fID,feederIP FROM Feeders WHERE petName ='".mysql_real_escape_string($aNameExplode[0])."' AND userID='".$urow['userID']."'");
+				$crow = mysqli_fetch_array($feederID);
 				//echo $aFeeder;
 			}
 			if(isset($_POST['Amount'])){
@@ -111,10 +105,7 @@
 						$boolM = $boolT = $boolW = $boolTh = $boolF = $boolSa = $boolSu = false;
 					}
 				}
-				//mysqli_query($connection,"INSERT INTO Schedules(scheduleName, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Everyday, aTime, AMPM, fID, amountFed, userID) VALUES('".$scheduleName."','".$boolM."','".$boolT."','".$boolW."','".$boolTh."','".$boolF."','".$boolSa."','".$boolSu."','".$boolE."','".$aTime."','".$ampm."','".$crow[$i]['fID']."','".$amountFed."','".$urow['userID']."')");
-				echo $ampm;
-				$schIns = $connection->prepare("INSERT INTO Schedules(scheduleName, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Everyday, aTime, AMPM, fID, amountFed, userID) VALUES(:scheduleName, :boolM, :boolT, :boolW, :boolTh, :boolF, :boolSa, :boolSu, :boolE, :aTime, :ampm, :fID, :amountFed, :userID)");
-				$schIns->execute(array(':scheduleName' => $scheduleName, ':boolM' => $boolM, ':boolT' => $boolT, ':boolW' => $boolW, ':boolTh' => $boolTh, ':boolF' => $boolF, ':boolSa' => $boolSa, ':boolSu' => $boolSu, ':boolE' => $boolE, ':aTime' => $aTime, ':ampm' => $ampm, ':fID' => $crow[0]['fID'], ':amountFed' => $amountFed, ':userID' => $urow[0]['userID']));
+				mysqli_query($connection,"INSERT INTO Schedules(scheduleName, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Everyday, aTime, AMPM, fID, amountFed, userID) VALUES('".$scheduleName."','".$boolM."','".$boolT."','".$boolW."','".$boolTh."','".$boolF."','".$boolSa."','".$boolSu."','".$boolE."','".$aTime."','".$ampm."','".$crow['fID']."','".$amountFed."','".$urow['userID']."')");
 				header('Refresh: 2; URL=logged_in.php');
 				echo "<p>The schedule was created successfully, you will be redirected to the managing page in a moment.</p>";
 				//exec('pushSchedule.py '.$crow['feederIP'], $output);
@@ -150,22 +141,13 @@
     <div class="controls">
      <select name='Feeders'>
   <?php	//grants the user an option to select their feeder - this is being changed soon.
-			//$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
-				$userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
-				$userID->execute(array($_SESSION['email']));
-				//$arow = mysqli_fetch_assoc($userID);
-				$arow = $userID->fetchAll(PDO::FETCH_ASSOC);
-				//$feederName = mysqli_query($connection, "SELECT petName FROM Feeders WHERE userID='".mysql_real_escape_string($arow['userID'])."'");
-				$feederName = $connection->prepare("SELECT petName FROM Feeders WHERE userID=?");
-				$feederName->execute(array($arow[0]['userID']));
-				//$num = mysqli_num_rows($feederName);
-				$num = $feederName->rowCount();
-				$y = 0;
-				$row = $feederName->fetchAll(PDO::FETCH_ASSOC);
-				foreach($row as $row1){//while($row = $feederName->fetchAll(PDO::FETCH_ASSOC)){
-					echo "<option value='".htmlspecialchars(stripslashes($row1['petName'] . "'s Feeder"), ENT_QUOTES)."'>".stripslashes($row1['petName'] . "'s Feeder")."</option>";
-					$y++;
-				}
+			$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
+				  $arow = mysqli_fetch_assoc($userID);
+				  $feederName = mysqli_query($connection, "SELECT petName FROM Feeders WHERE userID='".mysql_real_escape_string($arow['userID'])."'");
+				  $num = mysqli_num_rows($feederName);
+				  while($row = mysqli_fetch_array($feederName)){
+					echo "<option value='".htmlspecialchars(stripslashes($row['petName'] . "'s Feeder"), ENT_QUOTES)."'>".stripslashes($row['petName'] . "'s Feeder")."</option>";
+				  }
   ?>
 </select>
     </div>
