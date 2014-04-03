@@ -1,0 +1,128 @@
+/*Scalability*/
+
+img, video, audio, iframe, form, table {
+  width: 100%;
+}
+
+/*Tablet Landscape: 1024px*/
+@media only screen and (max-width: 1024px) {
+
+/*    body {
+      background-color: red;
+    }*/
+
+    #pager {
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 460px;  /*change as required 260+15 */
+      z-index: 999;
+    }
+
+    #pager a {
+
+      width: 14px;
+      height: 14px;
+      margin-right: 27px;
+    }
+
+    .X 
+    {
+      padding: 2.5px 6.5px !important;
+      font-size: 20px !important;
+      margin: 1px !important;
+    }
+}
+
+
+/*Tablet Portrait: 768px */
+
+@media only screen and (max-width: 768px) {
+
+/*    body {
+      background-color: yellow;
+    }*/
+
+    #pager {
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 400px;  /*change as required 260+15 */
+      z-index: 999;
+    }
+
+    #pager a {
+
+      width: 13px;
+      height: 13px;
+      margin-right: 23px;
+    }
+
+    .X 
+    {
+      padding: 2.1px 5.3px !important;
+      font-size: 18px !important;
+      margin: 1px !important;
+    }
+}
+
+/*Smartphone Landscape: 480px */
+@media (max-width: 480px) {
+
+/*    body {
+      background-color: purple;
+    }*/
+
+    #pager {
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 320px;  /*change as required 260+15 */
+      z-index: 999;
+    }
+
+    #pager a {
+
+      width: 11px;
+      height: 11px;
+      margin-right: 18px;
+    }
+
+    .X 
+    {
+      padding: 1.7px 4.6px !important;
+      font-size: 16px !important;
+      margin: 1px !important;
+    }
+}
+
+/*Smartphone portrait:320px */
+
+@media only screen and (max-width: 320px) {
+
+/*    body {
+      background-color: orange;
+    }*/
+
+    #pager {
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 233px;  /*change as required 260+15 */
+      z-index: 999;
+    }
+
+    #pager a {
+
+      width: 9px;
+      height: 9px;
+      margin-right: 12px;
+    }
+
+    .X 
+    {
+      padding: 1px 3.4px !important;
+      font-size: 14px !important;
+      margin: 1px !important;
+    }
+}

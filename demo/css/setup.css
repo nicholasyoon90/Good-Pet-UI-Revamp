@@ -1,0 +1,317 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+body
+{
+  /*background-color: blue;*/
+  background-image: url('../img/background.jpg');
+}
+
+
+
+
+/*        POSITIONING        */
+
+.absolute
+{
+  position: relative;
+  display: block;
+	font-family: 'Open Sans', sans-serif;
+	text-align: center;
+  line-height: 0.6rem;
+  top: 15%;
+  margin: 0 auto; 
+}
+
+.next
+{
+  position: absolute;
+  display: inline-block;
+  bottom: 110px;
+  right: 20%;
+  min-width: 50px;
+  min-height: 50px;
+  height: 50px;
+  width: auto;
+  text-align: center;
+}
+
+.back
+{
+  position: absolute;
+  display: inline-block;
+  bottom: 110px;
+  left: 17%;
+  min-width: 50px;
+  min-height: 50px;
+  height: 50px;
+  width: auto;
+  text-align: center;
+}
+
+.timeline
+{
+  position: absolute;
+  display: block;
+  left: 0;
+  right: 0px;
+  margin: 0 auto; 
+  bottom: 100px;
+  text-align: center;
+}
+
+.inputfields
+{
+  background-color: #C0C0C0;
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 15px;
+  display: block;
+  max-width: 505px;
+  height: auto;
+}
+
+.inputIn
+{
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.input100
+{
+  width: 43% !important;
+  padding: 1.4% 0px 1.4% 5px !important;
+  margin-bottom: 0 !important;
+}
+
+.input10
+{
+  width: 43% !important;
+  padding: 2% 0px 2% 5px !important;
+  margin-bottom: 0 !important;
+}
+
+.buttonScale
+{
+  height: 1%;
+  padding: 2px 5px !important;
+  margin-bottom: 10px;
+}
+
+.X 
+{
+  padding: 2.7px 8px !important;
+  font-size: 22px !important;
+  margin: .6em 1px 1px 1px !important;
+}
+
+.picture
+{
+  position: relative;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 90%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.connect
+{ 
+  position: relative;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 180px;
+  margin: 0 auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*         STYLING         */
+
+
+/*pagenation dots*/
+
+#pager {
+  position: relative;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 495px;  /*change as required 260+15 */
+  z-index: 999;
+}
+
+#pager a {
+  display: inline-block;
+  float: left;
+  width: 15px;
+  height: 15px;
+  text-indent: -999em;
+  background: #fff;
+  /*border-radius: 10px; */
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  box-shadow: 0 0 1px 1px #707173; /* border color */
+  margin-right: 30px;
+}
+
+#pager a {
+  background: #c0c0c0; /* optional: color when hovered */
+}
+
+#pager a.activeSlide {
+  background: #707173; /* color when active */
+}
+
+
+/*input fields*/
+
+::-webkit-input-placeholder { 
+  color:    #b5b5b5;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+} 
+ 
+::-moz-placeholder { 
+  color:    #CCCCCC; 
+} 
+ 
+.input[type="text"], .input[type="email"], .input[type="password"], .input[type="number"], .input[type="file"], .input[type="time"], .input[type="search"] {
+  background-color: #E0E0E0; 
+  font-size: 1.5rem; 
+  border-radius: 0px;
+  border: 10px;
+  padding: 13px 11px; 
+  width: 100%;
+  max-width: 480px;
+  box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 ); 
+  border-style: outset 10px 10px 10px 10px;
+} 
+
+.input[type="text"]:focus, .input[type="email"]:focus, .input[type="password"]:focus, .input[type="number"]:focus, .input[type="file"]:focus, .input[type="time"]:focus, .input[type="search"]:focus { 
+    background: #fff; 
+    box-shadow: 0px 0px 0px 3px #969696, inset 0px 2px 3px rgba( 0,0,0,0.2 ), 0px 5px 5px rgba( 0,0,0,0.15 ); 
+    outline: none;    
+} 
+
+.input[type=number] {
+    -webkit-appearance: none;
+}
+   
+
+/*select menu styling*/
+
+.styled-select {
+   width: 100%;
+   max-width: 480px;
+   height: 48px; 
+   font-size: 1.5rem; 
+   background: url('../img/new_arrow.png') no-repeat right #ddd;
+   }
+
+.styled-select select {
+   width: 100%;
+   max-width: 480px;
+   height: 48px;
+   font-family: 'Open Sans', sans-serif;
+   font-weight: 600;
+   color: #ADADAD;
+   font-size: 1.5rem; 
+   background: transparent;
+   padding: 10px;
+   border: 0;
+   border-radius: 0;
+   -webkit-appearance: none;
+   }
+
+
+
+/*next and back buttons*/
+
+.button {
+   background: #1D3956;
+   background: -moz-linear-gradient(top, #1D3956, #1D3956);
+   padding: 7px 22px;
+   color: white;
+   font-size: 15px;
+   font-family: 'Open Sans', sans-serif;
+   font-weight: 600;
+   vertical-align: middle;
+   }
+.button:hover {
+   border-top-color: #134d73;
+   background: #134d73;
+   color: #ccc;
+   }
+.button:active {
+   border-top-color: #08324d;
+   background: #08324d;
+   }
+
+
+
+
+
+/* FONT STUFF */
+
+.p1
+{
+  font-weight: 300;
+  font-size: 1.5em;
+}
+
+.p2
+{
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.p3
+{
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
+.p4
+{
+  font-weight: 300;
+  font-size: 0.7em;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+   line-height: 1.15;
+}
+
+h1 { font-size: 3em; }
+h2 { font-size: 3em; }
+
+
+
+
+//*fixes*/
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  height: 0;
+  line-height: 0;
+}

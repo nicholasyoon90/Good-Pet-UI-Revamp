@@ -1,6 +1,71 @@
-@charset "utf-8";
-/* CSS Document */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
 
-body{
+.p1
+{
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: 300;
+	font-size: 50px;
+	line-height: 50px;
+}
 
-	}
+.p2
+{
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: 600;
+	font-size: 50px;
+	line-height: 50px;
+}
+
+.p3
+{
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: 300;
+	font-size: 30px;
+	line-height: 30px;
+}
+
+.p4
+{
+	font-family: 'Open Sans', sans-serif; 
+	font-weight: 300;
+	font-size: 20px;
+	line-height: 15px;
+}
+
+.b
+{
+	background-color: white;
+}
+
+.absolute2
+{
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: auto;
+	max-width: 700px;
+	max-height: 700px;
+	left: 0;
+	right: 0;
+	top: 25%;
+	text-align: center;
+	background-color: rgba(0,0,0,.1);
+	width: 700px;
+}
+
+.nextposition
+{
+	position: absolute;
+	left: 65%;
+	right: 35%;
+	top: 55%;
+}
+
+.backposition
+{
+	position: absolute;
+	left: 35%;
+	right: 65%;
+	top: 55%;
+}
+}
