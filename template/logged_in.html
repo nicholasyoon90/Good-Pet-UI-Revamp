@@ -77,7 +77,7 @@
                     </span>
                 </div>
 				
-				<!--SOMEHOW NEED TO MAKE THE BODY TO THE SIZE OF THE ENTIRE PAGE-->
+
                 <div class="panel-body">
                     <div class="tab-content">
 
@@ -85,9 +85,8 @@
                         <div class="tab-pane active" id="tab1">
                             <!--start the form class for input fields-->
 							<section style="margin: 5px;">
-							<fieldset style="min-height:150px;">
-							<legend><b>PET INFO</b></legend>
-							
+							<div class="pet_info">
+							<!--PET INFO-->			
 								<!--NAME-->
 								<form class="form-horizontal" role="form">
 										<div class="form-group">
@@ -117,7 +116,7 @@
 									<!--BREED-->
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
-										<label for="type" class="col-sm-2 control-label">BREED</label>
+										<label for="breed" class="col-sm-2 control-label">BREED</label>
 											<div class="col-sm-10">
 												<select class="form-control">
 													<option>Pomeranian</option>
@@ -132,7 +131,7 @@
 									<!--GENDER-->
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
-										<label for="type" class="col-sm-2 control-label">GENDER</label>
+										<label for="gender" class="col-sm-2 control-label">GENDER</label>
 											<div class="col-sm-10">
 												<select class="form-control">
 													<option>Male</option>
@@ -146,7 +145,7 @@
 									<!--AGE-->
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
-										<label for="type" class="col-sm-2 control-label">AGE</label>
+										<label for="age" class="col-sm-2 control-label">AGE</label>
 											<div class="col-sm-10">
 												<select class="form-control">
 													<option>1</option>
@@ -171,7 +170,7 @@
 									<!--WEIGHT-->
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
-										<label for="name" class="col-sm-2 control-label">WEIGHT</label>
+										<label for="weight" class="col-sm-2 control-label">WEIGHT</label>
 											<div class="col-sm-10">
 												<input type="text" class="form-control" id="weight">
 											</div>
@@ -182,7 +181,7 @@
 									<!--FOOD BRAND-->
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
-										<label for="type" class="col-sm-2 control-label">TYPE</label>
+										<label for="food_type" class="col-sm-2 control-label">FOOD BRAND</label>
 											<div class="col-sm-10">
 												<select class="form-control">
 													<option>GoodInc Food</option>
@@ -197,7 +196,7 @@
 									<!--HEALTH-->
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
-										<label for="type" class="col-sm-2 control-label">TYPE</label>
+										<label for="health" class="col-sm-2 control-label">HEALTH</label>
 											<div class="col-sm-10">
 												<select class="form-control">
 													<option>Overweight</option>
@@ -209,12 +208,12 @@
 									</form>
 									<br>
 									
-							</fieldset>
+							</div>
 							
 							
 							<section style="margin: 0px;">
 							<fieldset style="min-height:150px;">
-							<legend><b>GENERAL PREFERENCES</b></legend>
+							<!--General Preferences-->
 							<h3>WHEN DOES KONA EAT?<h3>
 							
 							
@@ -292,7 +291,7 @@
 							
 							<section style="margin: 0px;">
 							<fieldset style="min-height:150px;">
-							<legend><b>PET PORTRAIT</b></legend>
+							<!--Pet Portrait-->
 									<form action="/playground/ajax_upload" id="newHotnessForm">
 										<label>Upload a Picture of Your Pet</label>
 										<input type="file" size="20" id="imageUpload" class=" ">

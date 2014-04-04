@@ -1932,9 +1932,11 @@ output {
 
 .form-control {
   display: block;
+  position: right;
   width: 100%;
-  height: 34px;
+  height: 0%;
   padding: 6px 12px;
+  margin: 0px;
   font-size: 14px;
   line-height: 1.428571429;
   color: #555555;
@@ -5841,10 +5843,10 @@ a.list-group-item.active:focus .list-group-item-text {
 }
 
 .panel-good {
-  border-color: #07508F;
+  border-color: ;
 }
 
-.panel-good > .panel-heading {
+.panel-good >  .panel-heading {
   color: #ffffff;
   background-color: #07508F;
   border-color: #07508F;

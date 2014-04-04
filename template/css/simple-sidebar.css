@@ -183,21 +183,36 @@
     border-bottom-color: transparent;
 }
 
-fieldset {
+.pet_info {
     font-family: sans-serif;
-    border: 5px solid #1F497D;
     background: #C0C0C0;
-    border-radius: 5px;
     padding: 15px;
+    margin: 10px;
+    display: inline-block;
+    width: 50%;
 }
 
-legend {
-    background: #1F497D;
-	width:150px;
-    color: #fff;
-    padding: 5px 10px ;
-    font-size: 16px;
-    border-radius: 5px;
-    box-shadow: 5px solid #1F497D;
-    margin-left: 8px;
+.gen_pref {
+    font-family: sans-serif;
+    background: #C0C0C0;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block;
 }
+
+.pet_portrait {
+    font-family: sans-serif;
+    background: #C0C0C0;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block;
+}
+
+
+fieldset {
+    font-family: sans-serif;
+    background: #C0C0C0;
+    padding: 15px;
+    margin: 10px;
+}
+
