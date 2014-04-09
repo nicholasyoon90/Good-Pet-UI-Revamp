@@ -1,0 +1,28 @@
+.panel-good {
+  border-color: #07508F;
+}
+
+.panel-good > .panel-heading {
+  color: #ffffff;
+  background-color: #07508F;
+  border-color: #07508F;
+}
+
+.panel-good > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #07508F;
+}
+
+.panel-good > .panel-footer + .panel-collapse .panel-body{
+  border-bottom-color: #07508F;
+}
+
+div.side-logo {
+	width: 128px;
+	height: 124px;
+	background-image: url("../img/side_logo.png");
+	background-repeat: no-repeat;
+  	margin-right: auto;
+  	margin-left: auto;
+  	margin-top: 22px;
+  	margin-bottom: 25px;
+}

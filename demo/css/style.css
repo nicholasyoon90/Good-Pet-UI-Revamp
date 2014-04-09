@@ -13,6 +13,10 @@ html { background: transparent }
 	color: #ffffff;
 }
 
+.login {
+	color: #ffffff;
+}
+
 .subhead {
 	color: #ffffff;
 	font-size: 24px;
@@ -27,4 +31,61 @@ div.logo {
   	margin-left: auto;
   	margin-top: auto;
   	padding-top: -75px;
+}
+
+.jumbotron {
+  padding: 30px;
+  margin-bottom: 30px;
+  font-size: 21px;
+  font-weight: 200;
+  font-color: white;
+  line-height: 2.1428571435;
+  color: inherit;
+  background-color: rgba(0,0,0,0.23);
+}
+
+.btn-darkgood {
+  color: #ffffff;
+  background-color: rgba(0,0,0,0.33);
+  border-color: rgba(0,0,0,0.33);
+}
+
+.btn-darkgood:hover,
+.btn-darkgood:focus,
+.btn-darkgood:active,
+.btn-darkgood.active,
+.open .dropdown-toggle.btn-darkgood {
+  color: #ffffff;
+  background-color: rgba(0,0,0,0.23);
+  border-color: rgba(0,0,0,0.23);
+}
+
+.btn-darkgood:active,
+.btn-darkgood.active,
+.open .dropdown-toggle.btn-darkgood {
+  background-image: none;
+}
+
+.btn-darkgood.disabled,
+.btn-darkgood[disabled],
+fieldset[disabled] .btn-darkgood,
+.btn-darkgood.disabled:hover,
+.btn-darkgood[disabled]:hover,
+fieldset[disabled] .btn-darkgood:hover,
+.btn-darkgood.disabled:focus,
+.btn-darkgood[disabled]:focus,
+fieldset[disabled] .btn-darkgood:focus,
+.btn-darkgood.disabled:active,
+.btn-darkgood[disabled]:active,
+fieldset[disabled] .btn-darkgood:active,
+.btn-darkgood.disabled.active,
+.btn-darkgood[disabled].active,
+fieldset[disabled] .btn-darkgood.active {
+  background-color: rgba(0,0,0,0.33);
+  border-color: rgba(0,0,0,0.33);
+}
+
+.btn-darkgood .badge {
+  color: rgba(0,0,0,0.33);
+  background-color: #fff;
 }

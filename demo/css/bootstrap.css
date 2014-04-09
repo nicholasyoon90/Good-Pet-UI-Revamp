@@ -2396,52 +2396,6 @@ fieldset[disabled] .btn-primary.active {
   background-color: #fff;
 }
 
-.btn-darkgood {
-  color: #ffffff;
-  background-color: rgba(0,0,0,0.33);
-  border-color: rgba(0,0,0,0.33);
-}
-
-.btn-darkgood:hover,
-.btn-darkgood:focus,
-.btn-darkgood:active,
-.btn-darkgood.active,
-.open .dropdown-toggle.btn-darkgood {
-  color: #ffffff;
-  background-color: rgba(0,0,0,0.23);
-  border-color: rgba(0,0,0,0.23);
-}
-
-.btn-darkgood:active,
-.btn-darkgood.active,
-.open .dropdown-toggle.btn-darkgood {
-  background-image: none;
-}
-
-.btn-darkgood.disabled,
-.btn-darkgood[disabled],
-fieldset[disabled] .btn-darkgood,
-.btn-darkgood.disabled:hover,
-.btn-darkgood[disabled]:hover,
-fieldset[disabled] .btn-darkgood:hover,
-.btn-darkgood.disabled:focus,
-.btn-darkgood[disabled]:focus,
-fieldset[disabled] .btn-darkgood:focus,
-.btn-darkgood.disabled:active,
-.btn-darkgood[disabled]:active,
-fieldset[disabled] .btn-darkgood:active,
-.btn-darkgood.disabled.active,
-.btn-darkgood[disabled].active,
-fieldset[disabled] .btn-darkgood.active {
-  background-color: rgba(0,0,0,0.33);
-  border-color: rgba(0,0,0,0.33);
-}
-
-.btn-darkgood .badge {
-  color: rgba(0,0,0,0.33);
-  background-color: #fff;
-}
-
 .btn-warning {
   color: #ffffff;
   background-color: #f0ad4e;
