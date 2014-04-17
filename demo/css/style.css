@@ -42,6 +42,11 @@ div.logo {
   line-height: 2.1428571435;
   color: inherit;
   background-color: rgba(0,0,0,0.23);
+
+    .p {
+      color: #ffffff;
+      font-size: 24px;
+    }
 }
 
 .btn-darkgood {

@@ -1,214 +1,89 @@
-<?php require_once("includes/session.php"); 
-require_once("includes/connection.php"); 
-require_once("includes/functions.php");
-require_once("includes/PasswordHash.php"); ?>
-<?php
-	$message = '';
-	$tk = '';
-	$hasher = new PasswordHash(8, false);
-	/*if (logged_in()) {
-		redirect_to("logged_in.php");
-	}
-	*/
-	//if(isset($_SESSION['email'])){
-	//$remd = mysqli_query($connection, "SELECT remid,email FROM Users");
-	$remd = $connection->query("SELECT remid,email FROM Users");
-	//while($remrow = $remd->fetchAll(PDO::FETCH_ASSOC)/*mysqli_fetch_array($remd)*/){
-	foreach ($remd as $remrow) {
-		if (isset($_COOKIE['TKC'])) {
-			if ($_COOKIE['TKC'] == $remrow['remid'])
-			{
-				//echo $_COOKIE["TKC"];
-				$tk = uniqid($remrow['email'],true);
-				//mysqli_query($connection,"UPDATE Users SET remid ='".$tk."' WHERE email ='".$remrow['email']."'");
-				$updateRem = $connection->prepare("UPDATE Users SET remid=? WHERE email=?");
-				$updateRem->execute(array($tk, $remrow['email']));
-				setcookie("TKC", $tk, time()+31557600, "/", false, false, true); 
-				$_SESSION['email'] = $remrow['email'];
-				redirect_to("logged_in.php");
-			}
-		}
-	}
-	//}
-	include_once("includes/form_functions.php");
-	
-	// START FORM PROCESSING
-	if (isset($_POST['submit'])) { // Form has been submitted.
-		$errors = array();
-
-		// perform validations on the form data, make sure that the fields meet the length requirements, etc.
-		$required_fields = array('email', 'password');
-		$errors = array_merge($errors, check_required_fields($required_fields, $_POST));
-
-		$fields_with_lengths = array('email' => 32, 'password' => 72);
-		$errors = array_merge($errors, check_max_field_lengths($fields_with_lengths, $_POST));
-		// we are using an email and password for login verification, password goes through hashing algorithms as seen in PasswordHash.php
-		$email = trim($_POST['email']);
-		$password = trim($_POST['password']);
-		$stored_hash="*";
-		//$storage = mysqli_query($connection,"SELECT email, hashed_password FROM Users WHERE email='".$email."'");
-		$storage = $connection->prepare("SELECT email, hashed_password FROM Users WHERE email=?");
-		$storage->execute(array($email));
-		//$prow = mysqli_fetch_array($storage);
-		$prow = $storage->fetchAll(PDO::FETCH_ASSOC);
-		if($prow != false)
-			$stored_hash = $prow[0]['hashed_password'];
-		//echo $stored_hash;
-		$check = $hasher->CheckPassword($password,$stored_hash);
-		
-		
-		//$good_hash = create_hash($password);
-		//$hashed_password = validate_password($password, $good_hash);
-		
-		
-		if($check) {
-			if(isset($_POST['remember'])) {
-				$tk = uniqid($email,true);
-				//echo $tk;
-				//insert into users, $tk.
-				//mysqli_query($connection,"UPDATE Users SET remid ='".$tk."' WHERE email ='".$email."'");
-				$updateC = $connection->prepare("UPDATE Users SET remid=? WHERE email=?");
-				$updateC->execute(array($tk, $email));
-				setcookie("TKC", $tk, time()+31557600, "/", false, false, true); 
-			}
-			$_SESSION['email'] = $prow[0]['email'];
-			redirect_to("logged_in.php");
-		}
-		else {
-			$message = "Email/password combination incorrect.<br />
-					Please make sure your caps lock key is off and try again.";
-		}
-//old stuff below		
-		/*if ( empty($errors) ) {
-			// Check database to see if email exists there if there are no form errors and the password entered is correct.
-			$query = "SELECT email ";
-			$query .= "FROM Users ";
-			$query .= "WHERE email = '{$email}' ";
-			$query .= "AND hashed_password = '{$good_hash}' ";
-			$query .= "LIMIT 1";
-			$result_set = mysqli_query($connection, $query);
-			confirm_query($result_set);
-			if (mysqli_num_rows($result_set) == 1) {
-				// email/password authenticated
-				// and only 1 match
-				$found_user = mysqli_fetch_array($result_set);
-				$_SESSION['email'] = $found_user['email'];
-				
-				redirect_to("logged_in.php");
-			} else {
-				// email/password combo was not found in the database
-				$message = "Email/password combination incorrect.<br />
-					Please make sure your caps lock key is off and try again.";
-					
-			}
-		} else {
-			if (count($errors) == 1) {
-				$message = "There was 1 error in the form.";
-			} else {
-				$message = "There were " . count($errors) . " errors in the form.";
-			}
-			
-		}*/
-		
-	} else { // Form has not been submitted.
-		if (isset($_GET['logout']) && $_GET['logout'] == 1) {
-			$message = "You are now logged out.";
-		} 
-		$email = "";
-		$password = "";
-		
-	}
-?>
 <html>
-  <head>
-    <title>GOOD, Inc.</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-  </head>
-  <body>
-    <div class="container-fluid">
- <div class="row-fluid">
-    <div class="span6 offset3">
-     </div>
-     </div>
-      <div class="row-fluid">
-    <div class="span6 offset3">
-     </div>
-     </div>
- <h1><p class="text-center">Good Pet Feeder</p></h1>
- </div>
-  <div class="row-fluid">
-    <div class="span6 offset3">
-     </div>
-     </div>
-      <div class="row-fluid">
-    <div class="span6 offset3">
-     </div>
-     </div>
-    
-    <div class="row-fluid">
-    <div class="span6 offset3">
-    <button class="btn btn-large btn-block btn-primary" type="button">Buy A Feeder</button>
-    </div>
-    <div class="row-fluid">
-    <div class="span6 offset3">
-     </div>
-     </div>
-      <div class="row-fluid">
-    <div class="span6 offset3">
-     </div>
-     </div>
-    <div class="row-fluid">
-    <div class="span6 offset3">
-    <a href="set_up_feeder.php"><button class="btn btn-large btn-block btn-primary" type="button">Set Up Feeder</button></a>
-    </div>
-     <div class="row-fluid">
-    <div class="span6 offset3">
-     </div>
-     </div>
-      <div class="row-fluid">
-    <div class="span6 offset3">
-     </div>
-     </div>
-    <div class="row-fluid">
-    <div class="span6 offset3">
-  <btn class="dropdown">
-            <a class="btn btn-large btn-block btn-primary dropdown-toggle" href="#" data-toggle="dropdown">Manage  Feeder <strong class="caret"></strong></a>
-            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-              <!-- Login form here -->
-            
-         <form class="form-horizontal" method="POST" action="index.php">
-  <div class="control-group">
-    <label class="control-label" for="email">Email</label>
-    <div class="controls">
-      <input type="email" name="email" id="email" placeholder="email@domain.com">
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="password">Password</label>
-    <div class="controls">
-      <input type="password" name="password" id="password" placeholder="Password">
-    </div>
-  </div>
-  <div class="control-group">
-    <div class="controls">
-      <label class="checkbox">
-        <input type="checkbox" name="remember" id="remember"> Remember me
-      </label>
-      <button type="submit" name="submit" id="submit" class="btn btn-primary">Login</button>
-    </div>
-  </div>
-</form>
+<head>
+  <meta charset="utf-8">
+  <title>GOOD, Inc.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+	
+	<link href="css/bootstrap.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+  <![endif]-->
+
+  <!-- Fav and touch icons 
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" href="img/favicon.png">-->
+  
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+</head>
+<body class="home">
+	<br><br>
+	<div class="logo"></div>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="jumbotron">
+				<p class='good'>
+					The GOOD Pet Feeder
+				</p>
+				<p class='descrip'>
+					GOOD, Inc. has a mission to deliver quality products that add value to the world, while offering opportunities which enable the success of others. Our Smart Pet Feeder does all of this and more.
+				</p>
+				<p>
+					<a class="btn btn-darkgood btn-large" href="http://buygood.us">Learn more</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-md-4 column">
+			<p class='subhead'>
+				Buy A Feeder
+			</p>
+			<p class='descrip'>
+				This is the place to begin your journey. Have a look at our GOOD payment plans and if you see something that works for you, lock it in! If not, send us an email and we will see what we can do to best suit you!
+			</p>
+			<p>
+				<a class="btn btn-darkgood" href="#">Order Up »</a>
+			</p>
+		</div>
+		<div class="col-md-4 column">
+			<p class='subhead'>
+				Set Up Your Feeder
+			</p>
+			<p class='descrip'>
+				With Feeder in hand, or paw, this is where you will complete our GOOD, quick and easy initial setup process. Here you will be able to get your feeder online, setup your account and login for the first time! 
+			</p>
+			<p>
+				<a class="btn btn-darkgood" href="page1.html">Get Started »</a>
+			</p>
+		</div>
+		<div class="col-md-4 column">
+			<p class='subhead'>
+				Manage Your Feeder
+			</p>
+			<p class='descrip'>
+				Welcome back! This is the go to area for accessing your account, so have your information ready and prepare to login! Managing your schedules, pet information and more is just beyond this door!
+			</p>
+			<p>
+				<a class="btn btn-darkgood" href="login.php">Log In »</a>
+			</p>
+		</div>
+	</div>
 </div>
-</btn> 
-</div>
-</div>
-    
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </body>
+</body>
 </html>
-<?php //display error messages if there are any.
-if($message!='') echo $message; 
-?>

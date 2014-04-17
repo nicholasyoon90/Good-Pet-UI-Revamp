@@ -1,3 +1,79 @@
+<?php require_once("includes/session.php"); 
+require_once("includes/connection.php"); 
+require_once("includes/functions.php");
+require_once("includes/PasswordHash.php"); ?>
+<?php
+  $message = '';
+  $tk = '';
+  $hasher = new PasswordHash(8, false);
+  if (logged_in()) {
+    redirect_to("logged_in.php");
+  }
+  
+  $remd = $connection->query("SELECT remid,email FROM Users");
+  foreach ($remd as $remrow) {
+    if (isset($_COOKIE['TKC'])) {
+      if ($_COOKIE['TKC'] == $remrow['remid'])
+      {
+        $tk = uniqid($remrow['email'],true);
+        $updateRem = $connection->prepare("UPDATE Users SET remid=? WHERE email=?");
+        $updateRem->execute(array($tk, $remrow['email']));
+        setcookie("TKC", $tk, time()+31557600, "/", false, false, true); 
+        $_SESSION['email'] = $remrow['email'];
+        redirect_to("logged_in.php");
+      }
+    }
+  }
+  //}
+  include_once("includes/form_functions.php");
+  
+  // START FORM PROCESSING
+  if (isset($_POST['submit'])) { // Form has been submitted.
+    $errors = array();
+
+    // perform validations on the form data, make sure that the fields meet the length requirements, etc.
+    $required_fields = array('email', 'password');
+    $errors = array_merge($errors, check_required_fields($required_fields, $_POST));
+
+    $fields_with_lengths = array('email' => 32, 'password' => 72);
+    $errors = array_merge($errors, check_max_field_lengths($fields_with_lengths, $_POST));
+    // we are using an email and password for login verification, password goes through hashing algorithms as seen in PasswordHash.php
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+    $stored_hash="*";
+    $storage = $connection->prepare("SELECT email, hashed_password FROM Users WHERE email=?");
+    $storage->execute(array($email));
+    $prow = $storage->fetchAll(PDO::FETCH_ASSOC);
+    if($prow != false)
+      $stored_hash = $prow[0]['hashed_password'];
+    $check = $hasher->CheckPassword($password,$stored_hash);
+    
+    
+    if($check) {
+      if(isset($_POST['remember'])) {
+        $tk = uniqid($email,true);
+        //insert into users, $tk.
+        $updateC = $connection->prepare("UPDATE Users SET remid=? WHERE email=?");
+        $updateC->execute(array($tk, $email));
+        setcookie("TKC", $tk, time()+31557600, "/", false, false, true); 
+      }
+      $_SESSION['email'] = $prow[0]['email'];
+      redirect_to("logged_in.php");
+    }
+    else {
+      $message = "Email/password combination incorrect.<br />
+          Please make sure your caps lock key is off and try again.";
+    }
+    
+  } else { // Form has not been submitted.
+    if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+      $message = "You are now logged out.";
+    } 
+    $email = "";
+    $password = "";
+    
+  }
+?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -37,7 +113,7 @@
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<div class="jumbotron">
-				        <form class="form-horizontal" method="POST" action="index.php">
+				        <form class="form-horizontal" method="POST" action="login.php">
   							<div class="control-group">
     							<p class='login'>Email</p>
     							<div class="controls">
@@ -47,7 +123,7 @@
   							<div class="control-group">
     							<p class='login'>Password</p>
     							<div class="controls">
-      								<input type="password" name="password" id="password" placeholder="Password">
+      								<input type="password" name="password" id="password" placeholder="password">
     							</div>
   							</div>
   							<div class="control-group">
@@ -56,7 +132,7 @@
         								<input type="checkbox" name="remember" id="remember"> Remember me
       								</p>
       								<button type="submit" name="submit" id="submit" class="btn btn-darkgood">Log In »</button>
-      								<a class="btn btn-darkgood" href="index.html">Return Home »</a>
+      								<a class="btn btn-darkgood" href="index.php">Return Home »</a>
     							</div>
   							</div>
 						</form>
