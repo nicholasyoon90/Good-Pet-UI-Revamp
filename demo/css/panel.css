@@ -6,6 +6,7 @@
   color: #ffffff;
   background-color: #07508F;
   border-color: #07508F;
+  border-bottom: 0;
 }
 
 .panel-good > .panel-heading + .panel-collapse .panel-body {

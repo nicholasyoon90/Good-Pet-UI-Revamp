@@ -5720,7 +5720,7 @@ a.list-group-item.active:focus .list-group-item-text {
 }
 
 .panel-heading {
-  padding: 12px 17px;
+  padding: 0px 0px;
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;

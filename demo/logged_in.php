@@ -27,15 +27,17 @@
             <ul class="sidebar-nav">
                 
                 <div class="side-logo"></div>
-                <li><a href="#">KONA</a>
+
+                <li class="active">
+                    <a href="#">KONA</a>
                 </li>
-                <li><a href="add_feeder.php">ADD NEW PET     <span class="glyphicon glyphicon-plus"></span>
-</a>  <!--Need to change the plus sign to inside a circle-->
+                <li>
+                    <a href="page1.html">ADD NEW PET    <span class="glyphicon glyphicon-plus"></span></a>  <!--Need to change the plus sign to inside a circle-->
                 </li>
 
                 <!--Sidebar bottom justification-->
-                <div class="sidebar-bottom">
-                    <li><a href="#">GIVE FEEDBACK</a>
+                <div id="sidebar-bottom">
+                    <li><a href="http://buygood.us/contact.php">GIVE FEEDBACK</a>
                     </li>
                     <li><a href="#">ACCOUNT</a>  
                     </li>
@@ -67,94 +69,101 @@
                 <div class="col-md-12">
             <div class="panel panel-good">
                 <div class="panel-heading">
-				
-					<!--NEEDS TO BE ATTACHED TO THE DATABASE OF THE PET NAME NOT KONA -->
-                    <h3 class="panel-title">KONA'S FEEDER</h3>
-                    <span class="pull-right">
-                        <!-- Tabs -->
-                        <ul class="nav panel-tabs">
-                            <li class="active"><a href="#tab1" data-toggle="tab">SCHEDULE</a></li>
-                            <li><a href="#tab2" data-toggle="tab">SETTINGS</a></li>
-                        </ul>
-                    </span>
+                    <!-- Tabs -->
+                    <ul class="nav panel-tabs">
+                        <li class="pull-left"><a href="#tab1" data-toggle="tab">SCHEDULE</a></li>
+                        <li class="active pull-right"><a href="#tab2" data-toggle="tab">SETTINGS     <span class="glyphicon glyphicon-cog"></span></a></li>
+                    </ul>
+
                 </div>
 				
 
                 <div class="panel-body">
                     <div class="tab-content">
 
+
+                        <!--form input for settings-->
+                        <div class="tab-pane" id="tab1">
+                              HELLO MY NAME IS BLAH
+                        </div>
+
+          
+
                         <!--form input for schedules-->
-                        <div class="tab-pane active" id="tab1">
+                        <div class="tab-pane active" id="tab2">
                             <!--start the form class for input fields-->
 							<section style="margin: 5px;">
-							<div class="pet_info">
-							<!--PET INFO-->
-								<p> PET INFO </p>			
-								<!--NAME-->
-								<input class = "input inputIn" type="text" placeholder="NAME" />
-								   
-								<!--TYPE-->
-								<div class="styled-select inputIn">
-	            					<select> 
-						            	<option value="" disabled selected>TYPE</option>
-						                <option>Dog</option>
-						                <option>Cat</option>
-	            					</select>
-         						</div>
-         						<br>
-									
-								<!--BREED-->
-								<div class="styled-select inputIn">
-	            					<select> 
-						            	<option value="" disabled selected>BREED</option>
-						                <option>Pomeranian</option>
-						                <option>Beagle</option>
-						                <option>Maltese</option>
-	            					</select>
-         						</div>
-         						<br>
-									
-								<!--GENDER-->
-								<div class="styled-select inputIn">
-	            					<select> 
-						            	<option value="" disabled selected>GENDER</option>
-						                <option>Male</option>
-						                <option>Female</option>
-	            					</select>
-         						</div>
-								<br>
-									
-								<!--AGE-->
-								<input class = "input inputIn" type="number" placeholder="AGE (in years)" />
-									
-								<!--WEIGHT-->
-								<input class = "input inputIn" type="number" placeholder="WEIGHT (in lbs)" />
-									
-								<!--FOOD BRAND-->
-								<div class="styled-select inputIn">
-            						<select> 
-						                <option value="" disabled selected>FOOD BRAND</option>
-						                <option>All Brand</option>
-						                <option>Acana</option>
-						                <option>Advance Pet Diets - Select Choice All Natural</option>
-						                <option>Alpo</option>
-						                <option>Annamaet</option>
-				            		</select>
-         						</div>
-								<br>
-									
-								<!--HEALTH-->
-								<div class="styled-select inputIn">
-            						<select> 
-						                <option value="" disabled selected>HEALTH</option>
-						                <option>Overweight</option>
-						                <option>Underweight</option>
-						                <option>Healthy</option>
-				            		</select>
-         						</div>
-								<br>
-									
-							</div>
+                            <div class="col-md-7">
+    							<div class="pet_info">
+    							<!--PET INFO-->
+    								<p> PET INFO </p>			
+    								<!--NAME-->
+    								<input class = "input inputIn" type="text" placeholder="NAME" />
+    								   
+    								<!--TYPE-->
+    								<div class="styled-select inputIn">
+    	            					<select> 
+    						            	<option value="" disabled selected>TYPE</option>
+    						                <option>Dog</option>
+    						                <option>Cat</option>
+    	            					</select>
+             						</div>
+             						<br>
+    									
+    								<!--BREED-->
+    								<div class="styled-select inputIn">
+    	            					<select> 
+    						            	<option value="" disabled selected>BREED</option>
+    						                <option>Pomeranian</option>
+    						                <option>Beagle</option>
+    						                <option>Maltese</option>
+    	            					</select>
+             						</div>
+             						<br>
+    									
+    								<!--GENDER-->
+    								<div class="styled-select inputIn">
+    	            					<select> 
+    						            	<option value="" disabled selected>GENDER</option>
+    						                <option>Male</option>
+    						                <option>Female</option>
+    	            					</select>
+             						</div>
+    								<br>
+    									
+    								<!--AGE-->
+    								<input class = "input inputIn" type="number" placeholder="AGE (in years)" />
+    									
+    								<!--WEIGHT-->
+    								<input class = "input inputIn" type="number" placeholder="WEIGHT (in lbs)" />
+    									
+    								<!--FOOD BRAND-->
+    								<div class="styled-select inputIn">
+                						<select> 
+    						                <option value="" disabled selected>FOOD BRAND</option>
+    						                <option>All Brand</option>
+    						                <option>Acana</option>
+    						                <option>Advance Pet Diets - Select Choice All Natural</option>
+    						                <option>Alpo</option>
+    						                <option>Annamaet</option>
+    				            		</select>
+             						</div>
+    								<br>
+    									
+    								<!--HEALTH-->
+    								<div class="styled-select inputIn">
+                						<select> 
+    						                <option value="" disabled selected>HEALTH</option>
+    						                <option>Overweight</option>
+    						                <option>Underweight</option>
+    						                <option>Healthy</option>
+    				            		</select>
+             						</div>
+    								<br>
+    									
+    							</div>
+
+                            </div>
 							
 							
 							<section style="margin: 0px;">
@@ -186,11 +195,6 @@
 							
                         </div>
 
-                        <!--form input for settings-->
-                        <div class="tab-pane" id="tab2">
-						
-
-                        </div>
                     </div>
                 </div>
             </div>
