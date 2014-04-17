@@ -64,7 +64,7 @@
                         <p class="well">The template still uses the default Bootstrap rows and columns.</p>
                     </div>-->
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
             <div class="panel panel-good">
                 <div class="panel-heading">
 				
