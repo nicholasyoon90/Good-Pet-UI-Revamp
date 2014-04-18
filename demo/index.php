@@ -69,7 +69,7 @@
 				With Feeder in hand, or paw, this is where you will complete our GOOD, quick and easy initial setup process. Here you will be able to get your feeder online, setup your account and login for the first time! 
 			</p>
 			<p>
-				<a class="btn btn-darkgood" href="page1.html">Get Started »</a>
+				<a class="btn btn-darkgood" href="page1.php">Get Started »</a>
 			</p>
 		</div>
 		<div class="col-md-4 column">
