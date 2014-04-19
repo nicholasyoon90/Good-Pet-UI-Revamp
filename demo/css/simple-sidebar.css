@@ -22,6 +22,7 @@
 #sidebar-bottom {
   position: fixed; 
   bottom: 0;
+  width: 250px;
 }
 
 #page-content-wrapper {
@@ -50,23 +51,36 @@
   font-size: 22px;
 }
 
+
 .sidebar-nav li a:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.23);
+  /*color: #fff;*/
+  background-color: rgba(0,0,102,0.23);
   text-decoration: none;
 }
 
+/*
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
-  /*text-decoration: none;
-  color: #fff;
-  background: rgba(255,255,255,0.23);*/
-  color: #fff;
+    color: #fff;
     cursor: default;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-    background-color: rgba(255,255,255, .23);
+    background-color: rgba(0,0,51, 0.6);
+    border-bottom-color: transparent;
+}
+*/
+
+
+.sidebar-nav > li.active > a,
+.sidebar-nav > li.active > a:hover,
+.sidebar-nav > li.active > a:focus {
+    color: #ffffff;
+    cursor: default;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-color: rgba(0,0,51, .60);
     border-bottom-color: transparent;
 }
 
@@ -145,7 +159,7 @@
 /*Panel tabs*/
 .panel-tabs {
     position: relative;
-    bottom: 30px;
+    bottom: 0px;
     clear:both;
     border-bottom: 1px solid transparent;
     font-family: 'Open Sans', sans-serif;
@@ -179,9 +193,11 @@
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-    background-color: rgba(255,255,255, .23);
+    background-color: rgba(255,255,255, .20);
     border-bottom-color: transparent;
 }
+
+/*End panel tab*/
 
 .pet_info {
     font-family: 'Open Sans', sans-serif;
@@ -217,11 +233,18 @@ fieldset {
 }
 
 
+.panel-notitle {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: inherit;
+  visibility: hidden;
+}
 
-
-
-
-
+.panel-notitle > a {
+  color: inherit;
+}
 
 
 
