@@ -28,9 +28,9 @@
 
       <div class="timeline">
          <div id="pager">
-            <a href="page1.html" class="">1</a>
+            <a href="page1.php" class="">1</a>
             <a href="#" class="activeSlide">2</a>
-            <a href="page3.html" class="">3</a>
+            <a href="page3.php" class="">3</a>
             <a href="#" class="">4</a>
             <a href="#" class="">5</a>
             <a href="#" class="">6</a>
@@ -43,10 +43,10 @@
       </div>
 
       <div class="back">
-			<a href="page1.html"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
+			<a href="page1.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
 		</div>
       <div class="next">
-         <a href="page3.html"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
+         <a href="page3.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
       </div> 
 	</body>
 </html>

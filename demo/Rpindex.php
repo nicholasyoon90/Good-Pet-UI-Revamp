@@ -139,7 +139,7 @@
 		}	
 		for($m=($i-1); $m>=0; $m--)
 		{
-			echo "<option value='".$strength[$m][0][2].",".htmlspecialchars(stripslashes($strength[$m][0][0]), ENT_QUOTES)."'>".$strength[$m][0][0]."</option>";
+			echo "<option value='".$strength[$m][0][2].",".phpspecialchars(stripslashes($strength[$m][0][0]), ENT_QUOTES)."'>".$strength[$m][0][0]."</option>";
 		}
 ?>
 </select>
