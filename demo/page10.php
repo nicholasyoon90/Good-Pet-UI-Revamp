@@ -11,33 +11,6 @@
 		<script src="js/bootstrap.min.js"></script>
 
       <script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-      <script type="text/javascript">
-      $(function() {
-            var addDiv = $('#addinput');
-            var i = $('#addinput p').size() + 1;
-         $('#addNew').live('click', function() {
-            $('<p><input class = "input inputIn input100" type="time" id="p_new" name="p_new_' + i +'" value="" /> <input class = "input inputIn input10" type="text" id="p_new" name="p_new_' + i +'" value="" placeholder="1.5 CUPS" /> <a href="#" id="remNew"><button class="button X" type="button" class="btn btn-default btn-medium">X</button></a> </p>').appendTo(addDiv);
-            i++;
-
-            return false;
-         });
-
-         $('#remNew').live('click', function() {
-            if( i > 2 ) {
-               $(this).parents('p').remove();
-               i--;
-            }
-            return false;
-         });
-      });
-      </script>
-
-      <script src="js/flowtype.js"></script>
-      <script>
-         jQuery(document).ready(function(){
-         jQuery('body').flowtype();
-         });
-      </script>
 
 	</head>
 	<body>
@@ -66,16 +39,43 @@
             <a href="#" class="">6</a>
             <a href="#" class="">7</a>
             <a href="#" class="">8</a>
-            <a href="page9.html" class="">9</a>
+            <a href="page9.php" class="">9</a>
             <a href="#" class="activeSlide">10</a>
-            <a href="page11.html" class="">11</a>
+            <a href="page11.php" class="">11</a>
          </div>
       </div>
 	   <div class="back">
-         <a href="page9.html"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
+         <a href="page9.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
       </div>
       <div class="next">
-         <a href="page11.html"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
+         <a href="page11.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
       </div>
 	</body>
+    <script type="text/javascript">
+      $(function() {
+            var addDiv = $('#addinput');
+            var i = $('#addinput p').size() + 1;
+         $('#addNew').live('click', function() {
+            $('<p><input class = "input inputIn input100" type="time" id="p_new" name="p_new_' + i +'" value="" /> <input class = "input inputIn input10" type="text" id="p_new" name="p_new_' + i +'" value="" placeholder="1.5 CUPS" /> <a href="#" id="remNew"><button class="button X" type="button" class="btn btn-default btn-medium">X</button></a> </p>').appendTo(addDiv);
+            i++;
+
+            return false;
+         });
+
+         $('#remNew').live('click', function() {
+            if( i > 2 ) {
+               $(this).parents('p').remove();
+               i--;
+            }
+            return false;
+         });
+      });
+      </script>
+
+      <script src="js/flowtype.js"></script>
+      <script>
+         jQuery(document).ready(function(){
+         jQuery('body').flowtype();
+         });
+      </script>
 </html>

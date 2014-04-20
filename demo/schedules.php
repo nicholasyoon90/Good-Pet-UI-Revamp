@@ -163,7 +163,7 @@
 				$y = 0;
 				$row = $feederName->fetchAll(PDO::FETCH_ASSOC);
 				foreach($row as $row1){//while($row = $feederName->fetchAll(PDO::FETCH_ASSOC)){
-					echo "<option value='".htmlspecialchars(stripslashes($row1['petName'] . "'s Feeder"), ENT_QUOTES)."'>".stripslashes($row1['petName'] . "'s Feeder")."</option>";
+					echo "<option value='".phpspecialchars(stripslashes($row1['petName'] . "'s Feeder"), ENT_QUOTES)."'>".stripslashes($row1['petName'] . "'s Feeder")."</option>";
 					$y++;
 				}
   ?>

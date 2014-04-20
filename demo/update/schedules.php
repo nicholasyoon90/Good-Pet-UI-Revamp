@@ -146,7 +146,7 @@
 				  $feederName = mysqli_query($connection, "SELECT petName FROM Feeders WHERE userID='".mysql_real_escape_string($arow['userID'])."'");
 				  $num = mysqli_num_rows($feederName);
 				  while($row = mysqli_fetch_array($feederName)){
-					echo "<option value='".htmlspecialchars(stripslashes($row['petName'] . "'s Feeder"), ENT_QUOTES)."'>".stripslashes($row['petName'] . "'s Feeder")."</option>";
+					echo "<option value='".phpspecialchars(stripslashes($row['petName'] . "'s Feeder"), ENT_QUOTES)."'>".stripslashes($row['petName'] . "'s Feeder")."</option>";
 				  }
   ?>
 </select>
