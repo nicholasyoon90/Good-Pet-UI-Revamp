@@ -1,7 +1,52 @@
+<?php require_once("includes/connection.php"); 
+ require_once("includes/session.php"); 
+ require_once("includes/functions.php"); 
+  if(!logged_in()) {
+   redirect_to("login.php");
+ }
+?>
+<?php
+    $message = "Let's get some info about your pet.";
+    $message2 = "(click next to skip)";
+    if(isset($_POST['formSubmit']))
+    {
+      //$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
+      $userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
+      $userID->bindValue(1, $_SESSION['email'], PDO::PARAM_STR);
+      $userID->execute();
+      //$urow = mysqli_fetch_assoc($userID);
+      $urow = $userID->fetchALL(PDO::FETCH_ASSOC);
+      $feederID = $_SESSION['petFeedID'];
+      //echo $feederID;
+      //echo $_POST['PetHealth'];
+      $petFoodBrand = "";
+      if(isset($_POST['petFoodBrand'])){
+            $petFoodBrand = stripslashes(trim(mysql_prep($_POST['petFoodBrand'])));
+         }
+      $anAge = $petAge." years";
+      $aWeight = $petWeight." lbs";
+      //echo $petType;
+      //echo $petHealth;
+      //echo $petGender; echo $petAge; echo $petWeight; echo $petFoodBrand; echo $petHealth; echo $petFunFact;
+      //mysqli_query($connection, "UPDATE Feeders SET petType='".mysql_real_escape_string($petType)."', petBreed='".mysql_real_escape_string($petBreed)."', petGender='".mysql_real_escape_string($petGender)."', petAgeYears='".$petAge."', petWeightLbs='".$petWeight."', petFoodBrand='".mysql_real_escape_string($petFoodBrand)."', petFunFact='".mysql_real_escape_string($petFunFact)."' WHERE fID='".$feederID."'");
+      //mysqli_query($connection, "UPDATE Feeders SET petType='".mysql_real_escape_string($petType)."', petBreed='".mysql_real_escape_string($petBreed)."', petGender='".mysql_real_escape_string($petGender)."', petAgeYears='".$petAge."', petWeightLbs='".$petWeight."', petFoodBrand='".mysql_real_escape_string($petFoodBrand)."', petHealth='".mysql_real_escape_string($petHealth)."' WHERE fID='".$feederID."'");
+      $stmt = $connection->prepare("UPDATE Feeders SET petFoodBrand=? WHERE fID=?");    
+      $stmt->execute(array($petFoodBrand, $feederID));
+      if($stmt){
+        $message = 'Pet information updated successfully.';
+        $message2 = '(click next to continue)';
+      }
+      //mysqli_query($connection,"INSERT INTO Schedules(scheduleName, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Everyday, aTime, AMPM, fID, amountFed, userID) VALUES('".$scheduleName."','".$boolM."','".$boolT."','".$boolW."','".$boolTh."','".$boolF."','".$boolSa."','".$boolSu."','".$boolE."','".$aTime."','".$ampm."','".$crow['fID']."','".$amountFed."','".$urow['userID']."')");
+      //header('Refresh: 2; URL=logged_in.php');
+      //echo "<p>Pet Info saved successfully, you will be redirected to the managing page in a moment.</p>";
+      //exec('pushSchedule.py '.$crow['feederIP'], $output);
+    }
+          
+?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Setup Page 7</title>
+		<title>GOOD, Inc.</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -18,12 +63,13 @@
 	</head>
 	<body>
 		<div class="absolute">
-			<p class="p1">Let's get some more info about your pet.</p>
-			<p class="p4">(click next to skip)</p>
+         <p class="p1"><?php echo $message; ?></p>
+         <p class="p4"><?php echo $message2; ?></p>
 		</div>
+      <form action="page7.php" method="POST">
 		<div class="inputfields">
          <div class="styled-select inputIn">
-            <select> 
+            <select name="petFoodBrand"> 
                <option value="" disabled selected>FOOD BRAND</option>
                <option>All Brand</option>
                <option>Acana</option>
@@ -32,8 +78,9 @@
                <option>Annamaet</option>
             </select>
          </div>
-         <input class = "input inputIn" type="search" placeholder="FORMULA" />
-
+         <input class = "input inputIn" name="petFoodFormula" type="search" placeholder="FORMULA" />
+         <button class="button" type="submit" name="formSubmit" class="btn btn-default btn-small">UPDATE PET INFO</button>
+      </form>
       </div>
         <div class="timeline">
             <div id="pager">

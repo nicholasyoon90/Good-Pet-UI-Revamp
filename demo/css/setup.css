@@ -226,9 +226,32 @@ body
    background: url('../img/new_arrow.png') no-repeat right #ddd;
    }
 
+.styled-select-half {
+   width: 50%;
+   max-width: 240px;
+   height: 48px; 
+   font-size: 1.5rem; 
+   background: url('../img/new_arrow.png') no-repeat right #ddd;
+}
+
 .styled-select select {
    width: 100%;
    max-width: 480px;
+   height: 48px;
+   font-family: 'Open Sans', sans-serif;
+   font-weight: 600;
+   color: #ADADAD;
+   font-size: 1.5rem; 
+   background: transparent;
+   padding: 10px;
+   border: 0;
+   border-radius: 0;
+   -webkit-appearance: none;
+   }
+
+.styled-select-half select {
+   width: 50%;
+   max-width: 240px;
    height: 48px;
    font-family: 'Open Sans', sans-serif;
    font-weight: 600;

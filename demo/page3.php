@@ -8,11 +8,10 @@ if(logged_in()) {
 ?>
 <?php
    include_once("includes/form_functions.php");
-   $message = '';
+   $message = 'Now lets get your account set up!';
    $hasher = new PasswordHash(8, false);
    // START FORM PROCESSING
-   if (isset($_POST['next'])) { // Form has been submitted.
-      echo 'posted';
+   if (isset($_POST['createAccount'])) { // Form has been submitted.
       $errors = array();
 
       // perform validations on the form data
@@ -29,13 +28,12 @@ if(logged_in()) {
       $hash = $hasher->HashPassword($password);
 
       if ( empty($errors) && ($password == $password2) ) {
-         $query = $connection->prepare("INSERT INTO tempU(email, fname, hashed_password, done) VALUES(:email, :fname, :hash, :done)");
-         $result = $query->execute(array(':email' => $email, ':fname' => $fname, ':hash' => $hash, ':done' => 0));
+         $query = $connection->prepare("INSERT INTO Users(email, hashed_password, fname) VALUES(:email, :hash, :fname)");
+         $result = $query->execute(array(':email' => $email, ':hash' => $hash, ':fname' => $fname));
          //if the insert was successful, store this message to be displayed
          if ($result) {
-            $message = "The info was stored successfully.";
+            $message = "The account was successfully created, click Next.";
             $_SESSION['email'] = $email;
-            redirect_to('page4.php');
          } else {
             $message = "The user could not be created.";
             $message .= "<br />" . mysql_error();
@@ -51,6 +49,7 @@ if(logged_in()) {
       }
    } else { // Form has not been submitted.
       $password = "";
+      $password2 = "";
       $email = "";
       $fname = "";
    }
@@ -58,7 +57,7 @@ if(logged_in()) {
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Setup Page 3</title>
+		<title>GOOD, Inc.</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -76,13 +75,14 @@ if(logged_in()) {
 	<body>
       <form method="POST" action="page3.php">
 		<div class="absolute">
-			<p class="p1">Now lets get your account set up!</p><br> 
+			<p class="p1" id="msg"><?php echo $message; ?></p><br> 
 		</div>
-      <div class="inputfields">
-         <input class = "input inputIn" type="text" name="fname" placeholder="FIRST NAME" />
+      <div class="inputfields" id="inpts">
+         <input class = "input inputIn" type="text" name="fname" placeholder="NAME" />
          <input class = "input inputIn" type="email"  name="email" placeholder="EMAIL" />
          <input class = "input inputIn" type="password" name="password" placeholder="PASSWORD" /> 
          <input class = "input inputIn" type="password" name="password2" placeholder="REPEAT PASSWORD" />
+         <button class="button" type="submit" name="createAccount" class="btn btn-default btn-small">CREATE ACCOUNT</button>
       </div>
       <div class="timeline">
          <div id="pager">
@@ -103,7 +103,7 @@ if(logged_in()) {
          <a href="page2.php"><button class="button" type="button" name="back" class="btn btn-default btn-medium">BACK</button></a>
       </div>
       <div class="next">
-         <button class="button" type="submit" name="next" class="btn btn-default btn-medium">NEXT</button>
+         <a href="page4.php"><button class="button" type="button" name="next" class="btn btn-default btn-medium">NEXT</button></a>
       </div> 
       </form>
 	</body>

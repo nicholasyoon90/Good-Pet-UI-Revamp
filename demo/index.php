@@ -32,7 +32,7 @@
 </head>
 <body class="home">
 	<br><br>
-	<div class="logo"></div>
+	<div class="logo"><img src="img/GoodPet.png"/></div>
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">

@@ -23,14 +23,12 @@ html { background: transparent }
 }
 
 div.logo {
-	width: 408px;
-	height: 200px;
-	background-image: url("../img/GoodPet.png");
-	background-repeat: no-repeat;
-  	margin-right: auto;
-  	margin-left: auto;
-  	margin-top: auto;
-  	padding-top: -75px;
+	width: auto;
+	height: auto;
+  max-width: 100%;
+	/*background-image: url("../img/GoodPet.png");
+	background-repeat: no-repeat;*/
+text-align: center;
 }
 
 .jumbotron {

@@ -97,7 +97,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
-<link href="css/custom.css" rel="stylesheet" type="text/css" />
+<!--<link href="css/custom.css" rel="stylesheet" type="text/css" />-->
 </head>
 <body>
 <div class="row-fluid">
@@ -139,11 +139,10 @@
 		}	
 		for($m=($i-1); $m>=0; $m--)
 		{
-			echo "<option value='".$strength[$m][0][2].",".phpspecialchars(stripslashes($strength[$m][0][0]), ENT_QUOTES)."'>".$strength[$m][0][0]."</option>";
+			echo "<option value='".$strength[$m][0][2].",".htmlspecialchars(stripslashes($strength[$m][0][0]), ENT_QUOTES)."'>".$strength[$m][0][0]."</option>";
 		}
 ?>
 </select>
-<?php ?>
 </div>
 </div>
 <div id="area">

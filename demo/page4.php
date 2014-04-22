@@ -3,14 +3,16 @@
  require_once("includes/functions.php");
  require_once("includes/PasswordHash.php");
  require_once("includes/makeThumb.php");
- //include("includes/header.php"); ?>
-
+ //include("includes/header.php"); 
+ if(!logged_in()) {
+   redirect_to("login.php");
+ }
+?>
  <?php
  include_once("includes/form_functions.php");
-    $testVar = 0;
-    $message = '';
+    $message = "Let's get some info about your feeder.";
     // START FORM PROCESSING
-    if (isset($_POST['next'])) { // Form has been submitted.
+    if (isset($_POST['addFeeder'])) { // Form has been submitted.
         $errors = array();
 
         // perform validations on the form data
@@ -24,14 +26,16 @@
         $Name = trim(($_POST['petName']));
         $feederAttach = "'s Feeder";
         $petName = $Name . $feederAttach;
+        $userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
+        $userID->execute(array($_SESSION['email']));
+        $arow = $userID->fetchAll(PDO::FETCH_ASSOC);
         
         if ( empty($errors) ) {
-            $query = $connection->prepare("INSERT INTO tempF (fID, petName) VALUES(:fID, :petName)");
-            $result = $query->execute(array(':fID' => $fID, ':petName' => $Name));
+            $query = $connection->prepare("INSERT INTO Feeders (fID, petName, userID) VALUES(:fID, :petName, :userID)");
+            $result = $query->execute(array(':fID' => $fID, ':petName' => $Name, ':userID' => $arow[0]['userID']));
             if ($result) {
-                $message = "The feeder was successfully created.";
+                $message = "The feeder was successfully created, click Next.";
                 $_SESSION['petFeedID'] = $fID;
-                redirect_to("page5.php");
             } else {
                 $message = "The feeder could not be created.";
                 $message .= "<br />" . mysql_error();
@@ -51,7 +55,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Setup Page 4</title>
+		<title>GOOD, Inc.</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Bootstrap -->
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -69,11 +73,12 @@
 	<body>
       <form action="page4.php" method="POST">
 		<div class="absolute">
-			<p class="p1">Let's get some info about your feeder.</p>
+			<p class="p1"><?php echo $message; ?></p>
 		</div>
       <div class="inputfields">
          <input class = "input inputIn" type="text" name="petName" placeholder="PET NAME" /> <br>
          <input class = "input inputIn" type="number" name="fID" placeholder="FEEDER ID" />
+         <button class="button" type="submit" name="addFeeder" class="btn btn-default btn-small">ADD FEEDER</button>
       </div>
 
       <div class="timeline">
@@ -95,7 +100,7 @@
          <a href="page3.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
       </div>
       <div class="next">
-         <button class="button" type="submit" name="next" class="btn btn-default btn-medium">NEXT</button>
+         <a href="page5.php"><button class="button" type="button" name="next" class="btn btn-default btn-medium">NEXT</button></a>
       </div> 
    </form>
 	</body>
