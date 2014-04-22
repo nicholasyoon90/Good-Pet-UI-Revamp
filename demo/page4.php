@@ -67,6 +67,7 @@
       </script>
 	</head>
 	<body>
+    <div class ="wrapper">
       <form action="page4.php" method="POST">
 		<div class="absolute">
 			<p class="p1">Let's get some info about your feeder.</p>
@@ -97,6 +98,7 @@
       <div class="next">
          <button class="button" type="submit" name="next" class="btn btn-default btn-medium">NEXT</button>
       </div> 
+    </div>
    </form>
 	</body>
 </html>

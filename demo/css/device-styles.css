@@ -6,7 +6,9 @@ img, video, audio, iframe, form, table {
 
 /*Tablet Landscape: 1024px*/
 @media only screen and (max-width: 1024px) {
-
+    .wrapper {
+      width: 100%;
+    }
 /*    body {
       background-color: red;
     }*/
@@ -38,7 +40,9 @@ img, video, audio, iframe, form, table {
 /*Tablet Portrait: 768px */
 
 @media only screen and (max-width: 768px) {
-
+     .wrapper {
+      width: 100%;
+    }
 /*    body {
       background-color: yellow;
     }*/
@@ -68,7 +72,9 @@ img, video, audio, iframe, form, table {
 
 /*Smartphone Landscape: 480px */
 @media (max-width: 480px) {
-
+    .wrapper {
+      width: 100%;
+    }
 /*    body {
       background-color: purple;
     }*/
@@ -99,6 +105,9 @@ img, video, audio, iframe, form, table {
 /*Smartphone portrait:320px */
 
 @media only screen and (max-width: 320px) {
+    .wrapper {
+      width: 100%;
+    }
 
 /*    body {
       background-color: orange;
@@ -126,3 +135,14 @@ img, video, audio, iframe, form, table {
       margin: 1px !important;
     }
 }
+
+
+/*
+@media only screen and (max-height: 600px) {
+  .wrapper{
+    height: 500px;
+  }
+
+}
+
+*/

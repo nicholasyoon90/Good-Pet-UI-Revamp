@@ -74,37 +74,39 @@ if(logged_in()) {
       </script>
 	</head>
 	<body>
-      <form method="POST" action="page3.php">
-		<div class="absolute">
-			<p class="p1">Now lets get your account set up!</p><br> 
-		</div>
-      <div class="inputfields">
-         <input class = "input inputIn" type="text" name="fname" placeholder="FIRST NAME" />
-         <input class = "input inputIn" type="email"  name="email" placeholder="EMAIL" />
-         <input class = "input inputIn" type="password" name="password" placeholder="PASSWORD" /> 
-         <input class = "input inputIn" type="password" name="password2" placeholder="REPEAT PASSWORD" />
-      </div>
-      <div class="timeline">
-         <div id="pager">
-            <a href="#" class="">1</a>
-            <a href="page2.php" class="">2</a>
-            <a href="#" class="activeSlide">3</a>
-            <a href="page4.php" class="">4</a>
-            <a href="#" class="">5</a>
-            <a href="#" class="">6</a>
-            <a href="#" class="">7</a>
-            <a href="#" class="">8</a>
-            <a href="#" class="">9</a>
-            <a href="#" class="">10</a>
-            <a href="#" class="">11</a>
+      <div class="wrapper">
+         <form method="POST" action="page3.php">
+   		<div class="absolute">
+   			<p class="p1">Now lets get your account set up!</p><br> 
+   		</div>
+         <div class="inputfields">
+            <input class = "input inputIn" type="text" name="fname" placeholder="FIRST NAME" />
+            <input class = "input inputIn" type="email"  name="email" placeholder="EMAIL" />
+            <input class = "input inputIn" type="password" name="password" placeholder="PASSWORD" /> 
+            <input class = "input inputIn" type="password" name="password2" placeholder="REPEAT PASSWORD" />
          </div>
+         <div class="timeline">
+            <div id="pager">
+               <a href="#" class="">1</a>
+               <a href="page2.php" class="">2</a>
+               <a href="#" class="activeSlide">3</a>
+               <a href="page4.php" class="">4</a>
+               <a href="#" class="">5</a>
+               <a href="#" class="">6</a>
+               <a href="#" class="">7</a>
+               <a href="#" class="">8</a>
+               <a href="#" class="">9</a>
+               <a href="#" class="">10</a>
+               <a href="#" class="">11</a>
+            </div>
+         </div>
+         <div class="back">
+            <a href="page2.php"><button class="button" type="button" name="back" class="btn btn-default btn-medium">BACK</button></a>
+         </div>
+         <div class="next">
+            <button class="button" type="submit" name="next" class="btn btn-default btn-medium">NEXT</button>
+         </div> 
+         </form>
       </div>
-      <div class="back">
-         <a href="page2.php"><button class="button" type="button" name="back" class="btn btn-default btn-medium">BACK</button></a>
-      </div>
-      <div class="next">
-         <button class="button" type="submit" name="next" class="btn btn-default btn-medium">NEXT</button>
-      </div> 
-      </form>
 	</body>
 </html>

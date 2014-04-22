@@ -2,12 +2,43 @@
 
 body
 {
-  /*background-color: blue;*/
   background-image: url('../img/background.jpg');
 }
 
+.wrapper
+{
+  position: absolute;
+  width: 100%;
 
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  border: 1px solid red;
+}
 
+.con_container
+{
+  position: relative;
+  top: 0px;
+  display: block;  
+  border: 1px solid black;
+}
+
+.nav_container
+{
+  position: relative;
+  display: block;
+  top: 10px;
+  border: 3px solid green;
+}
+
+.but_container
+{
+  position: relative;
+  display: block;
+  top: 10px;
+  border: 3px solid yellow;
+}
 
 /*        POSITIONING        */
 
@@ -18,16 +49,17 @@ body
 	font-family: 'Open Sans', sans-serif;
 	text-align: center;
   line-height: 0.6rem;
-  top: 15%;
+  top: 10%;
   margin: 0 auto; 
+  border: 1px solid blue;
 }
 
-.next
+.back
 {
   position: absolute;
-  display: inline-block;
-  bottom: 110px;
-  right: 20%;
+  float: left;
+  display: block;
+  bottom: 0px;
   min-width: 50px;
   min-height: 50px;
   height: 50px;
@@ -35,12 +67,13 @@ body
   text-align: center;
 }
 
-.back
+.next
 {
-  position: absolute;
-  display: inline-block;
-  bottom: 110px;
-  left: 17%;
+  position: relative;
+  display: block;
+  float: right;
+  bottom: 0px;
+
   min-width: 50px;
   min-height: 50px;
   height: 50px;
@@ -50,12 +83,12 @@ body
 
 .timeline
 {
-  position: absolute;
+  position: relative;
+  float: center;
   display: block;
-  left: 0;
-  right: 0px;
+  left: 8px;
   margin: 0 auto; 
-  bottom: 100px;
+  bottom: 0px;
   text-align: center;
 }
 
@@ -109,12 +142,12 @@ body
 .picture
 {
   position: relative;
-  left: 0;
-  right: 0;
-  display: block;
-  width: 90%;
-  max-width: 350px;
+  left: 0%;
+  right: 0%;
   margin: 0 auto;
+  bottom: 10%;
+  display: block;
+  max-width: 350px;
 }
 
 .connect
@@ -126,23 +159,6 @@ body
   width: 180px;
   margin: 0 auto;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*         STYLING         */
 

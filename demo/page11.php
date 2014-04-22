@@ -52,32 +52,34 @@ require_once("includes/PasswordHash.php"); ?>
       </script>
 	</head>
 	<body>
-      <form action="page11.php" method="POST">
-		<div class="absolute">
-			<p class="p1">Thats it!</p>
-			<p class="p2">Enjoy your new feeder.</p>
-		</div>
-      <div class="timeline">
-         <div id="pager">
-            <a href="#" class="">1</a>
-            <a href="#" class="">2</a>
-            <a href="#" class="">3</a>
-            <a href="#" class="">4</a>
-            <a href="#" class="">5</a>
-            <a href="#" class="">6</a>
-            <a href="#" class="">7</a>
-            <a href="#" class="">8</a>
-            <a href="#" class="">9</a>
-            <a href="page10.php" class="">10</a>
-            <a href="#" class="activeSlide">11</a>
+      <div class="wrapper">
+         <form action="page11.php" method="POST">
+   		<div class="absolute">
+   			<p class="p1">Thats it!</p>
+   			<p class="p2">Enjoy your new feeder.</p>
+   		</div>
+         <div class="timeline">
+            <div id="pager">
+               <a href="#" class="">1</a>
+               <a href="#" class="">2</a>
+               <a href="#" class="">3</a>
+               <a href="#" class="">4</a>
+               <a href="#" class="">5</a>
+               <a href="#" class="">6</a>
+               <a href="#" class="">7</a>
+               <a href="#" class="">8</a>
+               <a href="#" class="">9</a>
+               <a href="page10.php" class="">10</a>
+               <a href="#" class="activeSlide">11</a>
+            </div>
          </div>
+         <div class="back">
+             <a href="page10.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
+         </div>
+         <div class="next">
+            <button class="button" type="submit" class="btn btn-default btn-medium">DONE</button>
+         </div> 
+         </form> 
       </div>
-      <div class="back">
-          <a href="page10.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
-      </div>
-      <div class="next">
-         <button class="button" type="submit" class="btn btn-default btn-medium">DONE</button>
-      </div> 
-      </form> 
 	</body>
 </html>
