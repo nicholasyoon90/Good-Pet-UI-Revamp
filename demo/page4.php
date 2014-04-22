@@ -71,6 +71,7 @@
       </script>
 	</head>
 	<body>
+    <div class ="wrapper">
       <form action="page4.php" method="POST">
 		<div class="absolute">
 			<p class="p1"><?php echo $message; ?></p>
@@ -102,6 +103,7 @@
       <div class="next">
          <a href="page5.php"><button class="button" type="button" name="next" class="btn btn-default btn-medium">NEXT</button></a>
       </div> 
+    </div>
    </form>
 	</body>
 </html>

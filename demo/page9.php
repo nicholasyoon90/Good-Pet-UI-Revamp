@@ -74,6 +74,7 @@
 	</head>
 	<body>
       <form action="page9.php" method="POST">
+         <div class="wrapper">
 		<div class="absolute">
 			<p class="p1"><?php echo $message; ?></p>
 			<p class="p4"><?php echo $message2; ?></p>			
@@ -162,13 +163,29 @@
             <a href="#" class="activeSlide">10</a>
             <a href="page10.php" class="">11</a>
          </div>
+         <div class="timeline">
+            <div id="pager">
+               <a href="#" class="">1</a>
+               <a href="#" class="">2</a>
+               <a href="#" class="">3</a>
+               <a href="#" class="">4</a>
+               <a href="#" class="">5</a>
+               <a href="#" class="">6</a>
+               <a href="#" class="">7</a>
+               <a href="page8.php" class="">8</a>
+               <a href="#" class="activeSlide">9</a>
+               <a href="page10.php" class="">10</a>
+               <a href="#" class="">11</a>
+            </div>
+         </div>
+         <div class="back">
+            <a href="page8.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
+         </div>
+         <div class="next">
+            <a href="page10.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
+         </div> 
       </div>
-	   <div class="back">
-         <a href="page8.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
-      </div>
-      <div class="next">
-         <a href="page10.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
-      </div>
+   </div>
 	</body>
     <script type="text/javascript">
       $(function() {

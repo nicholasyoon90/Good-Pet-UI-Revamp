@@ -20,8 +20,8 @@
 
 /*sidebar bottom justificaiton using div-id relationship*/
 #sidebar-bottom {
-  position: fixed; 
-  bottom: 0;
+  position: relative; 
+  top: 580px;
   width: 250px;
 }
 
@@ -202,17 +202,16 @@
 .pet_info {
     font-family: 'Open Sans', sans-serif;
     background: #C0C0C0;
-    padding: 15px;
-    margin: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
     display: inline-block;
-    width: 50%;
 }
 
 .gen_pref {
     font-family: 'Open Sans', sans-serif;
     background: #C0C0C0;
     padding: 15px;
-    margin: 10px;
+    margin-bottom: 15px;
     display: inline-block;
 }
 
@@ -220,16 +219,9 @@
     font-family: 'Open Sans', sans-serif;
     background: #C0C0C0;
     padding: 15px;
-    margin: 10px;
+    margin-bottom: 15px;
+    max-width: 220px;
     display: inline-block;
-}
-
-
-fieldset {
-    font-family: 'Open Sans', sans-serif;
-    background: #C0C0C0;
-    padding: 15px;
-    margin: 10px;
 }
 
 

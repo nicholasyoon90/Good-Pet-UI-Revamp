@@ -62,6 +62,7 @@
       </script>
 	</head>
 	<body>
+<div class="wrapper">
 		<div class="absolute">
          <p class="p1"><?php echo $message; ?></p>
          <p class="p4"><?php echo $message2; ?></p>
@@ -96,12 +97,30 @@
                <a href="#" class="">10</a>
                <a href="#" class="">11</a>
             </div>
-        </div> 
-		<div class="back">
-      		<a href="page6.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
-    	</div>
-      <div class="next">
-         <a href="page8.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
+            <input class = "input inputIn" type="search" placeholder="FORMULA" />
+
+         </div>
+           <div class="timeline">
+               <div id="pager">
+                  <a href="#" class="">1</a>
+                  <a href="#" class="">2</a>
+                  <a href="#" class="">3</a>
+                  <a href="#" class="">4</a>
+                  <a href="#" class="">5</a>
+                  <a href="page6.php" class="">6</a>
+                  <a href="#" class="activeSlide">7</a>
+                  <a href="page8.php" class="">8</a>
+                  <a href="#" class="">9</a>
+                  <a href="#" class="">10</a>
+                  <a href="#" class="">11</a>
+               </div>
+           </div> 
+   		<div class="back">
+         		<a href="page6.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
+       	</div>
+         <div class="next">
+            <a href="page8.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
+         </div>
       </div>  
 	</body>
 </html>

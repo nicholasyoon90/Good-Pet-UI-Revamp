@@ -73,6 +73,7 @@ if(logged_in()) {
       </script>
 	</head>
 	<body>
+<div class="wrapper">
       <form method="POST" action="page3.php">
 		<div class="absolute">
 			<p class="p1" id="msg"><?php echo $message; ?></p><br> 
@@ -98,7 +99,30 @@ if(logged_in()) {
             <a href="#" class="">10</a>
             <a href="#" class="">11</a>
          </div>
+         <div class="timeline">
+            <div id="pager">
+               <a href="#" class="">1</a>
+               <a href="page2.php" class="">2</a>
+               <a href="#" class="activeSlide">3</a>
+               <a href="page4.php" class="">4</a>
+               <a href="#" class="">5</a>
+               <a href="#" class="">6</a>
+               <a href="#" class="">7</a>
+               <a href="#" class="">8</a>
+               <a href="#" class="">9</a>
+               <a href="#" class="">10</a>
+               <a href="#" class="">11</a>
+            </div>
+         </div>
+         <div class="back">
+            <a href="page2.php"><button class="button" type="button" name="back" class="btn btn-default btn-medium">BACK</button></a>
+         </div>
+         <div class="next">
+            <button class="button" type="submit" name="next" class="btn btn-default btn-medium">NEXT</button>
+         </div> 
+         </form>
       </div>
+<<<<<<< HEAD
       <div class="back">
          <a href="page2.php"><button class="button" type="button" name="back" class="btn btn-default btn-medium">BACK</button></a>
       </div>
@@ -106,5 +130,7 @@ if(logged_in()) {
          <a href="page4.php"><button class="button" type="button" name="next" class="btn btn-default btn-medium">NEXT</button></a>
       </div> 
       </form>
+=======
+>>>>>>> master_nick
 	</body>
 </html>

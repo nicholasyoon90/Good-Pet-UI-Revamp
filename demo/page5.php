@@ -73,10 +73,12 @@
 	</head>
 	<body>
     <form action="page5.php" method="POST">
+        <div class="wrapper">
 		<div class="absolute">
 			<p class="p1"><?php echo $message; ?></p>
 			<p class="p4"><?php echo $message2; ?></p>
 		</div>
+    <div class="con_container clearfix">
       <div class="inputfields">
 			<div class="styled-select inputIn">
             <select name="petType"> 
@@ -98,7 +100,9 @@
          <input class = "input inputIn" type="number" name="petWeight" placeholder="WEIGHT" />
          <button class="button" type="submit" name="formSubmit" class="btn btn-default btn-small">UPDATE PET INFO</button>
       </div>
+    </div>
     </form>
+    <div class="nav_container clearfix">
 		<div class="timeline">
          <div id="pager">
             <a href="#" class="">1</a>
@@ -113,12 +117,15 @@
             <a href="#" class="">10</a>
             <a href="#" class="">11</a>
          </div>
+       </div>
         </div>
+        <div class="but_container clearfix">
 		<div class="back">
       	<a href="page4.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
    	</div>
       <div class="next">
          <a href="page6.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
       </div> 
+    </div>
 	</body>
 </html>

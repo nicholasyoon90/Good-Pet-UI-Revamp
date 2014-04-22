@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -13,6 +13,8 @@
     <!-- Add custom CSS here -->
     <link href="css/panel.css" rel="stylesheet">
     <link href="css/simple-sidebar.css" rel="stylesheet">
+    <link href="css/setup.css" rel="stylesheet">
+
     <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
 
 </head>
@@ -74,7 +76,6 @@
                         <li class="pull-left"><a href="#tab1" data-toggle="tab">SCHEDULE</a></li>
                         <li class="active pull-right"><a href="#tab2" data-toggle="tab">SETTINGS     <span class="glyphicon glyphicon-cog"></span></a></li>
                     </ul>
-
                 </div>
 				
 
@@ -92,7 +93,6 @@
                         <!--form input for schedules-->
                         <div class="tab-pane active" id="tab2">
                             <!--start the form class for input fields-->
-							<section style="margin: 5px;">
                             <div class="col-md-7">
     							<div class="pet_info">
     							<!--PET INFO-->
@@ -162,38 +162,34 @@
     								<br>
     									
     							</div>
-
                             </div>
 							
+							<div class="col-md-5">
+    							
+    							<div class="gen_pref">
+    							<!--General Preferences-->
+    							<p>WHEN DOES KONA EAT?<p>
+    							
+    							
+    							<!--TIME1-->
+    							<input class = "input inputIn" type="time" />
+             					<input class = "input inputIn" type="text" placeholder="1.5 CUPS" /> <br>
+             					<a href="#"><button class="button inputIn" type="button" class="btn btn-default btn-small">ADD NEW</button></a>			
+    							</div>
+                            </div>
 							
-							<section style="margin: 0px;">
-							<fieldset style="min-height:150px;">
-
-
-							<!--General Preferences-->
-							<p>WHEN DOES KONA EAT?<p>
-							
-							
-							<!--TIME1-->
-							<input class = "input inputIn" type="time" />
-         					<input class = "input inputIn" type="text" placeholder="1.5 CUPS" /> <br>
-         					<a href="#"><button class="button inputIn" type="button" class="btn btn-default btn-small">ADD NEW</button></a>
-							
-
-								
-							</fieldset>
-							
-							<section style="margin: 0px;">
-							<fieldset style="min-height:150px;">
-							<!--Pet Portrait-->
+                            <div class="col-md-5">	
+    							<div class="pet_portrait">
+    							<!--Pet Portrait-->
 									<form action="/playground/ajax_upload" id="newHotnessForm">
 										<label>Upload a Picture of Your Pet</label>
 										<input type="file" size="20" id="imageUpload" class=" ">
 										<button class="button" type="submit">SAVE</button>
 									</form>
-							</fieldset>
+    							</div>
+                            </div>
 							
-                        </div>
+                     
 
                     </div>
                 </div>
