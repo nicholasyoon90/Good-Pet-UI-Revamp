@@ -149,20 +149,6 @@
          </div>
       </div>
    </form>
-      <div class="timeline">
-         <div id="pager">
-            <a href="#" class="">1</a>
-            <a href="#" class="">2</a>
-            <a href="#" class="">3</a>
-            <a href="#" class="">4</a>
-            <a href="#" class="">5</a>
-            <a href="#" class="">6</a>
-            <a href="#" class="">7</a>
-            <a href="#" class="">8</a>
-            <a href="page8.php" class="">9</a>
-            <a href="#" class="activeSlide">10</a>
-            <a href="page10.php" class="">11</a>
-         </div>
          <div class="timeline">
             <div id="pager">
                <a href="#" class="">1</a>
@@ -184,7 +170,6 @@
          <div class="next">
             <a href="page10.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
          </div> 
-      </div>
    </div>
 	</body>
     <script type="text/javascript">

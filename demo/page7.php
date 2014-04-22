@@ -83,23 +83,6 @@
          <button class="button" type="submit" name="formSubmit" class="btn btn-default btn-small">UPDATE PET INFO</button>
       </form>
       </div>
-        <div class="timeline">
-            <div id="pager">
-               <a href="#" class="">1</a>
-               <a href="#" class="">2</a>
-               <a href="#" class="">3</a>
-               <a href="#" class="">4</a>
-               <a href="#" class="">5</a>
-               <a href="page6.php" class="">6</a>
-               <a href="#" class="activeSlide">7</a>
-               <a href="page8.php" class="">8</a>
-               <a href="#" class="">9</a>
-               <a href="#" class="">10</a>
-               <a href="#" class="">11</a>
-            </div>
-            <input class = "input inputIn" type="search" placeholder="FORMULA" />
-
-         </div>
            <div class="timeline">
                <div id="pager">
                   <a href="#" class="">1</a>

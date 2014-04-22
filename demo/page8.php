@@ -35,20 +35,6 @@
       <div class="connect">
          <a href="Rpindex.php"><button class="button" type="button" class="btn btn-default btn-extralarge">CONNECT TO WIFI</button></a>
       </div>
-      <div class="timeline">
-         <div id="pager">
-            <a href="#" class="">1</a>
-            <a href="#" class="">2</a>
-            <a href="#" class="">3</a>
-            <a href="#" class="">4</a>
-            <a href="#" class="">5</a>
-            <a href="#" class="">6</a>
-            <a href="#" class="">7</a>
-            <a href="page7.php" class="">8</a>
-            <a href="#" class="activeSlide">9</a>
-            <a href="page9.php" class="">10</a>
-            <a href="#" class="">11</a>
-         </div>
          <div class="timeline">
             <div id="pager">
                <a href="#" class="">1</a>
@@ -70,7 +56,6 @@
          <div class="next">
             <a href="page9.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
          </div>  
-      </div>
    </div>
 	</body>
 </html>
