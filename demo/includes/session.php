@@ -7,7 +7,7 @@
 	
 	function confirm_logged_in() {
 		if (!logged_in()) {
-			redirect_to("/demo/index.php");
+			redirect_to("login.php");
 		}
 	}
 ?>

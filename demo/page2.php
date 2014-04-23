@@ -25,7 +25,7 @@
    		</div>
          <div class="con_container clearfix">
             <div class="picture">
-               <img src = "../Setup/img/inst.JPG"><br>
+               <img src = "img/inst.JPG"><br>
             </div>
          </div>
 

@@ -209,7 +209,7 @@ for($q=0; $q<$numFeeders; $q++){
 }
 ?>
                 <li>
-                    <a href="page1.html">ADD NEW PET &nbsp &nbsp &nbsp &nbsp <img src = "img/circlePlus.png"/> </a> 
+                    <a href="page1.php">ADD NEW PET &nbsp &nbsp &nbsp &nbsp <img src = "img/circlePlus.png"/> </a> 
                 </li>
 
                 <!--Sidebar bottom justification-->
@@ -506,11 +506,61 @@ for($q=0; $q<$numFeeders; $q++){
                             </div>
 							
 							<div class="col-md-6">
-    							
+    							<?php
+                                      $message = "Awesome! Let's setup a feeding schedule.";
+                                      $message2 = "We'll use a simple everyday schedule for now, but you can customize it later.";
+                                      
+                                      if(isset($_POST['addSchedule']))
+                                      {
+                                         //$userID = mysqli_query($connection, "SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
+                                         $userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
+                                         $userID->execute(array($_SESSION['email']));
+                                         //$urow = mysqli_fetch_assoc($userID);
+                                         $urow = $userID->fetchAll(PDO::FETCH_ASSOC);
+                                         $am = false;
+                                         $pm = false;
+                                         $ampm;
+                                         $feederID = $_SESSION['petFeedID'];
+                                         if(isset($_POST['Hour'])){
+                                            $anHour = $_POST['Hour'];
+                                         }
+                                         if(isset($_POST['Minute'])){
+                                            $aMinute = $_POST['Minute'];
+                                         }
+                                         $aTime = $anHour.":".$aMinute;
+                                         if(isset($_POST['Amount'])){
+                                            $amountFed = $_POST['Amount'];
+                                         }
+                                         if(isset($_POST['am_pm'])){
+                                            $am_pm = $_POST['am_pm'];
+                                         }
+                                         if($am_pm == 'AM')
+                                         {
+                                            $am = True;
+                                            $ampm = False;
+                                         }
+                                         else if($am_pm == 'PM')
+                                         {
+                                            $pm = True;
+                                            $ampm = True;
+                                         }
+                                            //mysqli_query($connection,"INSERT INTO Schedules(scheduleName, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday, Everyday, aTime, AMPM, fID, amountFed, userID) VALUES('".$scheduleName."','".$boolM."','".$boolT."','".$boolW."','".$boolTh."','".$boolF."','".$boolSa."','".$boolSu."','".$boolE."','".$aTime."','".$ampm."','".$crow[$i]['fID']."','".$amountFed."','".$urow['userID']."')");
+                                         $schIns = $connection->prepare("INSERT INTO Schedules(scheduleName, Everyday, aTime, AMPM, fID, amountFed, userID) VALUES(:scheduleName, :boolE, :aTime, :ampm, :fID, :amountFed, :userID)");
+                                         $schIns->execute(array(':scheduleName' => "Default", ':boolE' => 1, ':aTime' => $aTime, ':ampm' => $ampm, ':fID' => $feederID, ':amountFed' => $amountFed, ':userID' => $urow[0]['userID']));
+                                         if($schIns){
+                                            $message = 'Schedule created successfully.';
+                                            $message2 = 'click Next.';
+                                         }
+                                            //eader('Refresh: 2; URL=logged_in.php');
+                                            //echo "<p>The schedule was created successfully, you will be redirected to the managing page in a moment.</p>";
+                                            //exec('pushSchedule.py '.$crow['feederIP'], $output);
+                                      }            
+                                ?>
                                 <p class ="p5">GENERAL PREFERENCES</p>
     							<div class="gen_pref clearfix">
+                                    <form action="logged_in.php" method="POST" name="addSchedule">
     							<!--General Preferences-->
-                                    <p class = "p5">WHEN DOES KONA EAT?<p>
+                                    <?php echo '<p class = "p5">WHEN DOES '.$petNames[0].' EAT?<p>'; ?>
                                         <div class="styled-select inputIn">
                                                  <select>
                                                     <option value="" disabled selected>HOUR</option>
@@ -568,10 +618,9 @@ for($q=0; $q<$numFeeders; $q++){
                                                     <option value='2'>2 Cups</option>
                                                  </select>
                                         </div>
-                                        <button class="button" type="submit" name="formSubmit">ADD SCHEDULE</button>
+                                        <button class="button" type="submit" name="addSchedule">ADD SCHEDULE</button>
 
-
-    							
+    							</form>
     						    </div>
                             </div>
 							

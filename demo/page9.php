@@ -127,6 +127,7 @@
                      </div>
                      <div class="styled-select inputIn">
                         <select name="am_pm">
+                        <option value="" disabled selected>AM/PM</option>
                         <option value="AM">AM</option>
                         <option value="PM">PM</option>
                         </select>
