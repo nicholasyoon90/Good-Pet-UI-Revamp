@@ -1,4 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+body {
+  font-family: 'Open Sans', sans-serif;
+}
 
 #wrapper {
   padding-left: 250px;
@@ -15,13 +18,12 @@
   overflow-y: auto;
   z-index: 1000;
   transition: all 0.4s ease 0s;
-  font-family: 'Open Sans', sans-serif;
 }
 
 /*sidebar bottom justificaiton using div-id relationship*/
 #sidebar-bottom {
   position: relative; 
-  top: 580px;
+  top: 250px; /*needs to be positioned properly*/
   width: 250px;
 }
 
@@ -121,40 +123,49 @@
 
 @media (max-width:767px) {
 
-#wrapper {
-  padding-left: 0;
+  #wrapper {
+    padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    left: 0;
+  }
+
+  #wrapper.active {
+    position: relative;
+    left: 250px;
+  }
+
+  #wrapper.active #sidebar-wrapper {
+    left: 250px;
+    width: 250px;
+    transition: all 0.4s ease 0s;
+  }
+
+  #menu-toggle {
+    display: inline-block;
+  }
+
+  .inset {
+    padding: 15px;
+  }
+
 }
 
-#sidebar-wrapper {
-  left: 0;
-}
-
-#wrapper.active {
-  position: relative;
-  left: 250px;
-}
-
-#wrapper.active #sidebar-wrapper {
-  left: 250px;
-  width: 250px;
-  transition: all 0.4s ease 0s;
-}
-
-#menu-toggle {
-  display: inline-block;
-}
-
-.inset {
-  padding: 15px;
-}
-
+.pic {
+    float: right;
+    margin-right: 10px;
 }
 
 .snack {
-    font-size: 31px;
-    font-weight: 300;
-    font-family: 'Open Sans', sans-serif;
+    float: left;
+    margin-left: 15px;
 }
+
+.b {
+    padding: 4px 15px !important;
+}
+
 
 /*Panel tabs*/
 .panel-tabs {
@@ -162,7 +173,6 @@
     bottom: 0px;
     clear:both;
     border-bottom: 1px solid transparent;
-    font-family: 'Open Sans', sans-serif;
 }
 
 .panel-tabs > li {
@@ -200,28 +210,39 @@
 /*End panel tab*/
 
 .pet_info {
-    font-family: 'Open Sans', sans-serif;
     background: #C0C0C0;
     padding: 20px;
     margin-bottom: 15px;
-    display: inline-block;
+    display: block;
+    
 }
 
 .gen_pref {
-    font-family: 'Open Sans', sans-serif;
     background: #C0C0C0;
     padding: 15px;
     margin-bottom: 15px;
-    display: inline-block;
+    display: block;
 }
 
 .pet_portrait {
-    font-family: 'Open Sans', sans-serif;
     background: #C0C0C0;
     padding: 15px;
     margin-bottom: 15px;
-    max-width: 220px;
-    display: inline-block;
+    display: block;
+}
+
+.scheduler {
+    background: #C0C0C0;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.notifs {
+    background: #C0C0C0;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: block;
 }
 
 
@@ -237,94 +258,3 @@
 .panel-notitle > a {
   color: inherit;
 }
-
-
-
-/*input fields*/
-
-::-webkit-input-placeholder { 
-    color:    #b5b5b5;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-} 
- 
-::-moz-placeholder { 
-    color:    #CCCCCC; 
-} 
- 
-.input[type="text"], .input[type="email"], .input[type="password"], .input[type="number"], .input[type="file"], .input[type="time"], .input[type="search"] {
-    background-color: #E0E0E0; 
-    font-size: 1rem; 
-    border-radius: 0px;
-    border: 10px;
-    padding: 13px 11px; 
-    width: 100%;
-    max-width: 480px;
-    max-height: 200px;
-    box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 ); 
-    border-style: outset 10px 10px 10px 10px;
-    margin-bottom: 25px;
-
-} 
-
-.input[type="text"]:focus, .input[type="email"]:focus, .input[type="password"]:focus, .input[type="number"]:focus, .input[type="file"]:focus, .input[type="time"]:focus, .input[type="search"]:focus { 
-    background: #fff; 
-    box-shadow: 0px 0px 0px 3px #969696, inset 0px 2px 3px rgba( 0,0,0,0.2 ), 0px 5px 5px rgba( 0,0,0,0.15 ); 
-    outline: none;    
-} 
-
-.input[type=number] {
-    -webkit-appearance: none;
-}
-   
-
-/*select menu styling*/
-
-
-.styled-select {
-   width: 100%;
-   max-width: 600px;
-   height: 48px;
-
-   overflow: hidden;
-   background: url('../img/new_arrow.png') no-repeat right #ddd;
-   }
-
-.styled-select select {
-
-   width: 100%;
-   height: 48px;
-
-   font-family: 'Open Sans', sans-serif;
-   font-weight: 600;
-   background: transparent;
-   padding: 12px;
-   font-size: 1rem;
-   line-height: 1;
-   border: 0;
-   border-radius: 0;
-   -webkit-appearance: none;
-   }
-
-
-/*next and back buttons*/
-
-.button {
-   background: #1D3956;
-   background: -moz-linear-gradient(top, #1D3956, #1D3956);
-   padding: 7px 22px;
-   color: white;
-   font-size: 15px;
-   font-family: 'Open Sans', sans-serif;
-   font-weight: 600;
-   vertical-align: middle;
-   }
-.button:hover {
-   border-top-color: #134d73;
-   background: #134d73;
-   color: #ccc;
-   }
-.button:active {
-   border-top-color: #08324d;
-   background: #08324d;
-   }

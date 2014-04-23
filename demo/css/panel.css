@@ -4,7 +4,7 @@
 
 .panel-good > .panel-heading {
   color: #ffffff;
-  background-color: #07508F;
+  background-image: url("../img/blueimg.jpg");
   border-color: #07508F;
   border-bottom: 0;
 }

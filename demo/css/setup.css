@@ -3,6 +3,7 @@
 body
 {
   background-image: url('../img/background.jpg');
+  font-family: 'Open Sans', sans-serif;
 }
 
 .wrapper
@@ -46,7 +47,6 @@ body
 {
   position: relative;
   display: block;
-	font-family: 'Open Sans', sans-serif;
 	text-align: center;
   line-height: 0.6rem;
   top: 10%;
@@ -201,7 +201,6 @@ body
 
 ::-webkit-input-placeholder { 
   color:    #b5b5b5;
-  font-family: 'Open Sans', sans-serif;
   font-weight: 600;
 } 
  
@@ -242,44 +241,24 @@ body
    background: url('../img/new_arrow.png') no-repeat right #ddd;
    }
 
-.styled-select-half {
-   width: 50%;
-   max-width: 240px;
-   height: 48px; 
-   font-size: 1.5rem; 
-   background: url('../img/new_arrow.png') no-repeat right #ddd;
-}
-
 .styled-select select {
    width: 100%;
    max-width: 480px;
    height: 48px;
-   font-family: 'Open Sans', sans-serif;
    font-weight: 600;
-   color: #ADADAD;
    font-size: 1.5rem; 
    background: transparent;
    padding: 10px;
    border: 0;
    border-radius: 0;
    -webkit-appearance: none;
+   color: gray;
    }
 
-.styled-select-half select {
-   width: 50%;
-   max-width: 240px;
-   height: 48px;
-   font-family: 'Open Sans', sans-serif;
-   font-weight: 600;
-   color: #ADADAD;
-   font-size: 1.5rem; 
-   background: transparent;
-   padding: 10px;
-   border: 0;
-   border-radius: 0;
-   -webkit-appearance: none;
-   }
-
+.styled-select select:focus {
+   box-shadow: 0px 0px 0px 3px #969696, inset 0px 2px 3px rgba( 0,0,0,0.2 ), 0px 5px 5px rgba( 0,0,0,0.15 ); 
+   outline: none; 
+}
 
 
 /*next and back buttons*/
@@ -290,7 +269,6 @@ body
    padding: 7px 22px;
    color: white;
    font-size: 15px;
-   font-family: 'Open Sans', sans-serif;
    font-weight: 600;
    vertical-align: middle;
    }
@@ -313,25 +291,37 @@ body
 .p1
 {
   font-weight: 300;
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 
 .p2
 {
   font-weight: 600;
-  font-size: 1.5em;
+  font-size: 1.4em;
 }
 
 .p3
 {
   font-weight: 400;
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 
 .p4
 {
   font-weight: 300;
   font-size: 0.7em;
+}
+
+.p5
+{
+  font-weight: 600;
+  font-size: 0.5em;
+}
+
+.p6
+{
+  font-weight: 400;
+  font-size: 0.5em;
 }
 
 h1,h2,h3,h4,h5,h6,p {

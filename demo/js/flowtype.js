@@ -19,8 +19,8 @@
          maximum   : 9999,
          minimum   : 1,
          maxFont   : 9999,
-         minFont   : 18,
-         fontRatio : 35
+         minFont   : 22,
+         fontRatio : 45
       }, options),
 
 // Do the magic math

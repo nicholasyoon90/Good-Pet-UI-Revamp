@@ -15,8 +15,6 @@
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/setup.css" rel="stylesheet">
 
-    <!--<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
-
 </head>
 
 <body>
@@ -34,7 +32,7 @@
                     <a href="#">KONA</a>
                 </li>
                 <li>
-                    <a href="page1.html">ADD NEW PET    <span class="glyphicon glyphicon-plus"></span></a>  <!--Need to change the plus sign to inside a circle-->
+                    <a href="page1.html">ADD NEW PET &nbsp &nbsp &nbsp &nbsp <img src = "img/circlePlus.png"/> </a> 
                 </li>
 
                 <!--Sidebar bottom justification-->
@@ -61,20 +59,22 @@
                 <a id="menu-toggle" href="#" class="btn btn-default">Menu<i class="icon-reorder"></i></a>
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="snack">I've been good! Could I have a snack?     <img src="img/pet_pic.png"></p>
-                        <!--<button class="btn">lol</button>-->
+                        <div class="pic"><img src="img/pet_pic.png"></div>
+                        <p class="p1 snack">I've been good! Could I have a snack?</p>
+                        <br> 
+                        <div class="snack">
+                            <button class="button b" type="submit" name="formSubmit">GIVE SNACK NOW</button>
+                            <button class="button b" type="submit" name="formSubmit">OPEN FEEDER</button>
+                        </div>
                     </div>
-                    <!--<div class="col-md-6">
-                        <p class="well">The template still uses the default Bootstrap rows and columns.</p>
-                    </div>-->
                 </div>
                 <div class="col-md-12">
             <div class="panel panel-good">
                 <div class="panel-heading">
                     <!-- Tabs -->
                     <ul class="nav panel-tabs">
-                        <li class="pull-left"><a href="#tab1" data-toggle="tab">SCHEDULE</a></li>
-                        <li class="active pull-right"><a href="#tab2" data-toggle="tab">SETTINGS     <span class="glyphicon glyphicon-cog"></span></a></li>
+                        <li class="pull-left"><a href="#tab1" data-toggle="tab" class="p6">SCHEDULE</a></li>
+                        <li class="active pull-right"><a href="#tab2" data-toggle="tab" class="p6">SETTINGS <span class="glyphicon glyphicon-cog"></span></a></li>
                     </ul>
                 </div>
 				
@@ -85,7 +85,24 @@
 
                         <!--form input for settings-->
                         <div class="tab-pane" id="tab1">
-                              HELLO MY NAME IS BLAH
+                            <div class="col-md-4">
+                                <p class="p5">MONDAY-THURSDAY, FRIDAY</p>
+                                <div class="scheduler">
+                                    <p class="p6"><b>9 AM</b>: 1.5 CUPS</p>
+                                    <p class="p6"><b>6:30 PM</b>: 1 CUP</p>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p class="p5">NOTIFICATIONS</p>
+                                <div class="notifs">
+                                    <p class="p5">The Feeder Jammed</p>
+                                    <p class="p5">Kona didn't eat his breakfast!</p>
+                                    <p class="p5">Kona ate his dinner</p>
+                                </div>
+                            </div>
+
                         </div>
 
           
@@ -93,10 +110,10 @@
                         <!--form input for schedules-->
                         <div class="tab-pane active" id="tab2">
                             <!--start the form class for input fields-->
-                            <div class="col-md-7">
+                            <div class="col-md-6">
+                                <p class="p5">PET INFO</p>
     							<div class="pet_info">
-    							<!--PET INFO-->
-    								<p> PET INFO </p>			
+    							<!--PET INFO-->			
     								<!--NAME-->
     								<input class = "input inputIn" type="text" placeholder="NAME" />
     								   
@@ -108,7 +125,6 @@
     						                <option>Cat</option>
     	            					</select>
              						</div>
-             						<br>
     									
     								<!--BREED-->
     								<div class="styled-select inputIn">
@@ -119,7 +135,6 @@
     						                <option>Maltese</option>
     	            					</select>
              						</div>
-             						<br>
     									
     								<!--GENDER-->
     								<div class="styled-select inputIn">
@@ -129,7 +144,6 @@
     						                <option>Female</option>
     	            					</select>
              						</div>
-    								<br>
     									
     								<!--AGE-->
     								<input class = "input inputIn" type="number" placeholder="AGE (in years)" />
@@ -148,7 +162,6 @@
     						                <option>Annamaet</option>
     				            		</select>
              						</div>
-    								<br>
     									
     								<!--HEALTH-->
     								<div class="styled-select inputIn">
@@ -159,37 +172,86 @@
     						                <option>Healthy</option>
     				            		</select>
              						</div>
-    								<br>
     									
     							</div>
                             </div>
 							
-							<div class="col-md-5">
+							<div class="col-md-6">
     							
-    							<div class="gen_pref">
+                                <p class ="p5">GENERAL PREFERENCES</p>
+    							<div class="gen_pref clearfix">
     							<!--General Preferences-->
-    							<p>WHEN DOES KONA EAT?<p>
+                                    <p class = "p5">WHEN DOES KONA EAT?<p>
+                                        <div class="styled-select inputIn">
+                                                 <select>
+                                                    <option value="" disabled selected>HOUR</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                 </select>
+                                        </div>
+                                        <div class="styled-select inputIn">
+                                                 <select>
+                                                 <option value="" disabled selected>MINUTE</option>
+                                                 <?php
+                                                    for ($f=0; $f<10; $f++)
+                                                    {
+                                                       ?>
+                                                          <option value="<?php echo "0".$f;?>"><?php echo "0".$f;?></option>
+                                                       <?php
+                                                    }
+                                                    for ($f=10; $f<60; $f++)
+                                                    {
+                                                       ?>
+                                                             <option value="<?php echo $f;?>"><?php echo $f;?></option>
+                                                         <?php
+                                                    }
+                                                 ?>
+                                                    
+                                                 </select>
+                                        </div>
+                                        <div class="styled-select inputIn">
+                                           <select>
+                                           <option value="" disabled selected>AM/PM</option>
+                                           <option value="AM">AM</option>
+                                           <option value="PM">PM</option>
+                                           </select>
+                                        </div>
+                                        <div class="styled-select inputIn">
+                                                 <select>
+                                                    <option value="" disabled selected>SELECT AMOUNT</option>
+                                                    <option value='.25'>1/4 Cup</option>
+                                                    <option value='.5'>1/2 Cup</option>
+                                                    <option value='.75'>3/4 Cup</option>
+                                                    <option value='1'>1 Cup</option>
+                                                    <option value='1.25'>1 1/4 Cups</option>
+                                                    <option value='1.5'>1 1/2 Cups</option>
+                                                    <option value='1.75'>1 3/4 Cups</option>
+                                                    <option value='2'>2 Cups</option>
+                                                 </select>
+                                        </div>
+                                        <button class="button" type="submit" name="formSubmit">ADD SCHEDULE</button>
+
+
     							
-    							
-    							<!--TIME1-->
-    							<input class = "input inputIn" type="time" />
-             					<input class = "input inputIn" type="text" placeholder="1.5 CUPS" /> <br>
-             					<a href="#"><button class="button inputIn" type="button" class="btn btn-default btn-small">ADD NEW</button></a>			
-    							</div>
+    						    </div>
                             </div>
 							
-                            <div class="col-md-5">	
-    							<div class="pet_portrait">
-    							<!--Pet Portrait-->
-									<form action="/playground/ajax_upload" id="newHotnessForm">
-										<label>Upload a Picture of Your Pet</label>
-										<input type="file" size="20" id="imageUpload" class=" ">
-										<button class="button" type="submit">SAVE</button>
-									</form>
-    							</div>
+                            <div class="col-md-6">
+                                <p class ="p5">PET PORTRAIT</p>	
+                                <div class="pet_portrait">
+                                   <input class = "input inputIn" type="file" />
+                                </div>
                             </div>
-							
-                     
 
                     </div>
                 </div>
@@ -201,7 +263,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="js/jquery-1.10.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
 
     <!-- Custom JavaScript for the Menu Toggle -->
@@ -210,6 +272,13 @@
         e.preventDefault();
         $("#wrapper").toggleClass("active");
     });
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/flowtype.js"></script>
+    <script>
+        jQuery(document).ready(function(){
+        jQuery('body').flowtype();
+        });
     </script>
 </body>
 
