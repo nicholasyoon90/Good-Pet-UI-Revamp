@@ -39,6 +39,12 @@ img, video, audio, iframe, form, table {
       padding-left: 65px;
     }
 
+    .picture
+    {
+      width: 315px;
+      height: 220.5px;
+    }
+
 }
 
 
@@ -78,6 +84,16 @@ img, video, audio, iframe, form, table {
       padding-left: 60px;
     }
 
+    .picture
+    {
+      width: 280px;
+      height: 196px;
+    }
+
+    .input[type="text"], .input[type="email"], .input[type="password"], .input[type="number"], .input[type="file"], .input[type="time"], .input[type="search"] {
+      width: 99%;
+    }
+
 }
 
 /*Smartphone Landscape: 480px */
@@ -113,6 +129,16 @@ img, video, audio, iframe, form, table {
 
     .timeline {
       padding-left: 50px;
+    }
+
+    .picture
+    {
+      width: 245px;
+      height: 171.5px;
+    }
+
+    .input[type="text"], .input[type="email"], .input[type="password"], .input[type="number"], .input[type="file"], .input[type="time"], .input[type="search"] {
+      width: 94%;
     }
 
 }
@@ -154,17 +180,14 @@ img, video, audio, iframe, form, table {
       padding-left: 25px;
     }
 
-    .input[type="text"], .input[type="email"], .input[type="password"], .input[type="number"], .input[type="file"], .input[type="time"], .input[type="search"] { 
-      max-width: 400px; 
-    } 
+    .picture
+    {
+      width: 210px;
+      height: 147px;
+    }
+
+    .input[type="text"], .input[type="email"], .input[type="password"], .input[type="number"], .input[type="file"], .input[type="time"], .input[type="search"] {
+      width: 88%;
+    }
 
 } 
-/*
-@media only screen and (max-height: 600px) {
-  .wrapper{
-    height: 500px;
-  }
-
-}
-
-*/

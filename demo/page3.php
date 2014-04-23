@@ -81,12 +81,12 @@ if(logged_in()) {
 
 
             <div class="con_container clearfix">
-               <div class="inputfields" id="inpts">
+               <div class="inputfields">
                   <input class = "input inputIn" type="text" name="fname" placeholder="NAME" />
                   <input class = "input inputIn" type="email"  name="email" placeholder="EMAIL" />
                   <input class = "input inputIn" type="password" name="password" placeholder="PASSWORD" /> 
                   <input class = "input inputIn" type="password" name="password2" placeholder="REPEAT PASSWORD" />
-                  <button class="button" type="submit" name="createAccount" class="btn btn-default btn-small">CREATE ACCOUNT</button>
+                  <button class="button" type="submit" name="createAccount">CREATE ACCOUNT</button>
                </div>
             </div>
 
