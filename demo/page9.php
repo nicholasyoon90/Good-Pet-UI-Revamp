@@ -183,7 +183,7 @@
    </div>
 	</body>
 
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
       $(function() {
             var addDiv = $('#addinput');
             var i = $('#addinput p').size() + 1;
@@ -197,12 +197,12 @@
          $('#remNew').live('click', function() {
             if( i > 2 ) {
                $(this).parents('p').remove();
-               i--;
+               i- -;
             }
             return false;
          });
       });
-      </script>
+      </script> -->
 
       <script src="js/flowtype.js"></script>
       <script>
