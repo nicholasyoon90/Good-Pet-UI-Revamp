@@ -78,6 +78,7 @@
 			<p class="p1"><?php echo $message; ?></p>
 			<p class="p4"><?php echo $message2; ?></p>
 		</div>
+
     <div class="con_container clearfix">
       <div class="inputfields">
 			<div class="styled-select inputIn">
@@ -96,36 +97,40 @@
             </select>
          </div>
 
+
          <input class = "input inputIn" type="number" name="petAge" placeholder="AGE" />
          <input class = "input inputIn" type="number" name="petWeight" placeholder="WEIGHT" />
          <button class="button" type="submit" name="formSubmit" class="btn btn-default btn-small">UPDATE PET INFO</button>
       </div>
     </div>
     </form>
-    <div class="nav_container clearfix">
-		<div class="timeline">
-         <div id="pager">
-            <a href="#" class="">1</a>
-            <a href="#" class="">2</a>
-            <a href="#" class="">3</a>
-            <a href="page4.php" class="">4</a>
-            <a href="#" class="activeSlide">5</a>
-            <a href="page6.php" class="">6</a>
-            <a href="#" class="">7</a>
-            <a href="#" class="">8</a>
-            <a href="#" class="">9</a>
-            <a href="#" class="">10</a>
-            <a href="#" class="">11</a>
+
+    <div class="footer">
+      <div class="nav_container clearfix">
+  		<div class="timeline">
+           <div id="pager">
+              <a href="#" class="">1</a>
+              <a href="#" class="">2</a>
+              <a href="#" class="">3</a>
+              <a href="page4.php" class="">4</a>
+              <a href="#" class="activeSlide">5</a>
+              <a href="page6.php" class="">6</a>
+              <a href="#" class="">7</a>
+              <a href="#" class="">8</a>
+              <a href="#" class="">9</a>
+              <a href="#" class="">10</a>
+             
+           </div>
          </div>
-       </div>
-        </div>
-        <div class="but_container clearfix">
-		<div class="back">
-      	<a href="page4.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
-   	</div>
-      <div class="next">
-         <a href="page6.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
-      </div> 
+          </div>
+          <div class="but_container clearfix">
+  		<div class="back">
+        	<a href="page4.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
+     	</div>
+        <div class="next">
+           <a href="page6.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
+        </div> 
+      </div>
     </div>
 	</body>
 </html>
