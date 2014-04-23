@@ -62,27 +62,33 @@
       </script>
 	</head>
 	<body>
-<div class="wrapper">
-		<div class="absolute">
-         <p class="p1"><?php echo $message; ?></p>
-         <p class="p4"><?php echo $message2; ?></p>
-		</div>
-      <form action="page7.php" method="POST">
-		<div class="inputfields">
-         <div class="styled-select inputIn">
-            <select name="petFoodBrand"> 
-               <option value="" disabled selected>FOOD BRAND</option>
-               <option>All Brand</option>
-               <option>Acana</option>
-               <option>Advance Pet Diets - Select Choice All Natural</option>
-               <option>Alpo</option>
-               <option>Annamaet</option>
-            </select>
-         </div>
-         <input class = "input inputIn" name="petFoodFormula" type="search" placeholder="FORMULA" />
-         <button class="button" type="submit" name="formSubmit" class="btn btn-default btn-small">UPDATE PET INFO</button>
-      </form>
+    <div class="wrapper">
+  		<div class="absolute">
+           <p class="p1"><?php echo $message; ?></p>
+           <p class="p4"><?php echo $message2; ?></p>
+  		</div>
+
+      <div class="con_container clearfix">
+        <form action="page7.php" method="POST">
+  		  <div class="inputfields">
+           <div class="styled-select inputIn">
+              <select name="petFoodBrand"> 
+                 <option value="" disabled selected>FOOD BRAND</option>
+                 <option>All Brand</option>
+                 <option>Acana</option>
+                 <option>Advance Pet Diets - Select Choice All Natural</option>
+                 <option>Alpo</option>
+                 <option>Annamaet</option>
+              </select>
+           </div>
+           <input class = "input inputIn" name="petFoodFormula" type="search" placeholder="FORMULA" />
+           <button class="button" type="submit" name="formSubmit" class="btn btn-default btn-small">UPDATE PET INFO</button>
+        </form>
+        </div>
       </div>
+
+      <div class="footer">
+        <div class="nav_container clearfix">
            <div class="timeline">
                <div id="pager">
                   <a href="#" class="">1</a>
@@ -95,15 +101,21 @@
                   <a href="page8.php" class="">8</a>
                   <a href="#" class="">9</a>
                   <a href="#" class="">10</a>
-                  <a href="#" class="">11</a>
+                  
                </div>
            </div> 
-   		<div class="back">
-         		<a href="page6.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
-       	</div>
-         <div class="next">
-            <a href="page8.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
-         </div>
-      </div>  
+          </div>
+
+          <div class="but_container clearfix">
+         		  <div class="back">
+               		<a href="page6.php"><button class="button" type="button" class="btn btn-default btn-medium">BACK</button></a>
+             	</div>
+              <div class="next">
+                <a href="page8.php"><button class="button" type="button" class="btn btn-default btn-medium">NEXT</button></a>
+              </div>
+          </div>
+        </div>
+    </div>  
+
 	</body>
 </html>
