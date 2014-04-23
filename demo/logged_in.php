@@ -1,3 +1,11 @@
+<?php require_once("includes/session.php");
+ require_once("includes/connection.php");
+ require_once("includes/functions.php");
+ require_once("includes/PasswordHash.php");
+ require_once("includes/makeThumb.php");
+ confirm_logged_in();
+ ob_start();
+ //include("includes/header.php"); ?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -18,7 +26,170 @@
 </head>
 
 <body>
+    <?php
+                //grab all data relevant to schedules that needs to be displayed, and dynamically add it into table format on the webpage
+                $numSchedules = 0;
+                //$userID = mysqli_query($connection,"SELECT userID FROM Users WHERE email='".mysql_real_escape_string($_SESSION['email'])."'");
+                $userID = $connection->prepare("SELECT userID FROM Users WHERE email=?");
+                $userID->execute(array($_SESSION['email']));
+                //$arow = mysqli_fetch_array($userID);
+                $arow = $userID->fetchAll(PDO::FETCH_ASSOC);
+                //$feederName = mysqli_query($connection,"SELECT petName,fID FROM Feeders WHERE userID='".mysql_real_escape_string($arow['userID'])."'");
+                //$numFeeders = mysqli_num_rows($feederName);
+                $feederName = $connection->prepare("SELECT petName,fID,petType,petFoodBrand,petHealth,petAgeYears,petWeightLbs,petBreed,petGender FROM Feeders WHERE userID=?");
+                $feederName->execute(array($arow[0]['userID']));
+                $numFeeders = $feederName->rowCount();
+                //echo $numFeeders;
+                $feeders = array();
+                $petTypes = array();
+                $petBreeds = array();
+                $petGenders = array();
+                $petAges = array();
+                $petWeights = array();
+                $petHealths = array();
+                $petFoods = array();
+                $i = $j = $k = $x = $l = $q = 0;
+                $feederID1 = array();
+                $feederID2 = array();
+                $snames = array();
+                //$scheduleID = mysqli_query($connection,"SELECT sID,scheduleName,fID,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Everyday,aTime,AMPM,amountFed FROM Schedules WHERE userID ='".mysql_real_escape_string($arow['userID'])."'");
+                $scheduleID = $connection->prepare("SELECT sID,scheduleName,fID,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday,Everyday,aTime,AMPM,amountFed FROM Schedules WHERE userID=?");
+                $scheduleID->execute(array($arow[0]['userID']));
+                if($scheduleID != False){
+                    //$numSchedules = mysqli_num_rows($scheduleID);
+                    $numSchedules = $scheduleID->rowCount();
+                    //echo $numSchedules;
+                }
+                $days = array();
+                $ampm = array();
+                $am_and_pm = array();
+                $times = array();
+                $petNames = array();
+                $amountFed = array();
+                $row1 = $feederName->fetchAll(PDO::FETCH_ASSOC);
+                  foreach($row1 as $row11){//while($row1 = $feederName->fetch(PDO::FETCH_ASSOC)/*mysqli_fetch_array($feederName)*/){
+                    $capName = strtoupper(stripslashes($row11['petName']));
+                    $petNames[$i] = $capName;
+                    $feeders[$i] = stripslashes($row11['petName'] . "'s Feeder");
+                    $feederID1[$i] = $row11['fID'];
+                    $petTypes[$i] = $row11['petType'];
+                    $petBreeds[$i] = $row11['petBreed'];
+                    $petGenders[$i] = $row11['petGender'];
+                    $petAges[$i] = $row11['petAgeYears'];
+                    $petWeights[$i] = $row11['petWeightLbs'];
+                    $petHealths[$i] = $row11['petHealth'];
+                    $petFoods[$i] = $row11['petFoodBrand'];
+                    $i++;
+                  }
+                  //might have to do for loops instead of whiles. or for each. seems to be an issue with numfeeders/numschedules and lines in error.
+                  if($numSchedules != 0){
+                  $row2 = $scheduleID->fetchAll(PDO::FETCH_ASSOC);
+                  foreach($row2 as $row22){//while($row2 = $scheduleID->fetch(PDO::FETCH_ASSOC)/*mysqli_fetch_array($scheduleID)*/){
+                    //echo $row2['scheduleName'];
+                    $snames[$j] = stripslashes($row22['scheduleName']);
+                    $sIDs[$j] = $row22['sID'];
+                    $feederID2[$j] = $row22['fID'];
+                    //echo $feederID2[0];
+                    $am_and_pm[$j] = $row22['AMPM'];
+                    //$pm = $row2['PM'];
+                    $amount = $row22['amountFed'];
+                    $amo = '';
+                    if($amount == 0.25) {
+                        $amo = '1/4';
+                    }
+                    else if($amount == 0.50) {
+                        $amo = '1/2';
+                    }
+                    else if($amount == 0.75) {
+                        $amo = '3/4';
+                    }
+                    else if($amount == 1.00) {
+                        $amo = '1';
+                    }
+                    else if($amount == 1.25) {
+                        $amo = '1 1/4';
+                    }
+                    else if($amount == 1.50) {
+                        $amo = '1 1/2';
+                    }
+                    else if($amount == 1.75) {
+                        $amo = '1 3/4';
+                    }
+                    else if($amount == 2.00) {
+                        $amo = '2';
+                    }
+                    $dayString = '';
+                    $time = $row22['aTime'];
+                    if($row22['Monday'] == 1) {
+                        if($row22['Tuesday'] == 1 || $row22['Wednesday'] == 1 || $row22['Thursday'] == 1 || $row22['Friday'] == 1 || $row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+                            $dayString .= 'Monday, ';
+                        }
+                        else{
+                            $dayString .= 'Monday';
+                        }
+                    }
 
+                    if($row22['Tuesday'] == 1) {
+                        if($row22['Wednesday'] == 1 || $row22['Thursday'] == 1 || $row22['Friday'] == 1 || $row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+                            $dayString .= 'Tuesday, ';
+                        }
+                        else{
+                            $dayString .= 'Tuesday';
+                        }
+                    }
+                    if($row22['Wednesday'] == 1) {
+                        if($row22['Thursday'] == 1 || $row22['Friday'] == 1 || $row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+                            $dayString .= 'Wednesday, ';
+                        }
+                        else{
+                            $dayString .= 'Wednesday';
+                        }
+                    }
+                    if($row22['Thursday'] == 1) {
+                        if($row22['Friday'] == 1 || $row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+                            $dayString .= 'Thursday, ';
+                        }
+                        else{
+                            $dayString .= 'Thursday';
+                        }
+                    }
+                    if($row22['Friday'] == 1) {
+                        if($row22['Saturday'] == 1 || $row22['Sunday'] == 1 ){
+                            $dayString .= 'Friday, ';
+                        }
+                        else{
+                            $dayString .= 'Friday';
+                        }
+                    }
+                    if($row22['Saturday'] == 1) {
+                        if($row22['Sunday'] == 1 ){
+                            $dayString .= 'Saturday, ';
+                        }
+                        else{
+                            $dayString .= 'Saturday';
+                        }
+                    }
+                    if($row22['Sunday'] == 1) {
+                        $dayString .= 'Sunday';
+                    }
+                    if($row22["Everyday"] == 1) {
+                        $dayString .= 'Everyday ';
+                    }
+                    $times[$j] = $time;
+                    if($am_and_pm[$j] == 1){
+                        $ampm[$j] = "PM";
+                    }
+                    else if($am_and_pm[$j] == 0){
+                        $ampm[$j] = "AM";
+                    }
+                    $days[$j] = $dayString;
+                    $explodedDays = explode(" ", $dayString);
+                    $amountFed[$j] = $amo;
+                    $j++;
+                  }
+                 }
+?>
+<form action="logged_in.php" method="POST">
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -29,8 +200,14 @@
                 <div class="side-logo"></div>
 
                 <li class="active">
-                    <a href="#">KONA</a>
+                    <a href="#"><?php echo $petNames[0]; ?></a>
                 </li>
+<?php
+for($q=0; $q<$numFeeders; $q++){
+    $q++;
+    echo "<li><a href='#'>".$petNames[$q]."</a></li>";
+}
+?>
                 <li>
                     <a href="page1.html">ADD NEW PET &nbsp &nbsp &nbsp &nbsp <img src = "img/circlePlus.png"/> </a> 
                 </li>
@@ -113,46 +290,117 @@
                             <div class="col-md-6">
                                 <p class="p5">PET INFO</p>
     							<div class="pet_info">
+                                    <form name="petInfo" action="logged_in.php" method="POST">
+                <?php //for($q=0; $q<$numFeeders; $q++){
+                            //
+                        //}
+                ?>
     							<!--PET INFO-->			
     								<!--NAME-->
-    								<input class = "input inputIn" type="text" placeholder="NAME" />
+    								<?php echo '<input class = "input inputIn" type="text" value="'.$petNames[0].'" placeholder="NAME" />'; ?>
     								   
     								<!--TYPE-->
     								<div class="styled-select inputIn">
-    	            					<select> 
-    						            	<option value="" disabled selected>TYPE</option>
-    						                <option>Dog</option>
-    						                <option>Cat</option>
-    	            					</select>
+    	            					<?php if($petTypes[0] == "Dog") { 
+                                            echo '
+                                            <select> 
+    						            	 <option value="Dog" selected>'.$petTypes[0].'</option>
+    						                 <option value="Cat">Cat</option>
+    	            					    </select>';
+                                            }
+                                            else if($petTypes[0] == "Cat") {
+                                                echo '
+                                                <select>
+                                                <option value="Cat" selected>'.$petTypes[0].'<option>
+                                                <option value="Dog">Dog</option>
+                                                </select>';
+                                            }
+                                            else {
+                                                echo '
+                                                <select>
+                                                    <option value="" disabled selected>TYPE</option>
+                                                    <option value="Dog">Dog</option>
+                                                    <option value="Cat">Cat</option>
+                                                </select>';
+                                            }
+                                        ?>
              						</div>
     									
     								<!--BREED-->
     								<div class="styled-select inputIn">
+                                        <?php if($petBreeds[0] == "") {
+                                            echo '
     	            					<select> 
     						            	<option value="" disabled selected>BREED</option>
     						                <option>Pomeranian</option>
     						                <option>Beagle</option>
     						                <option>Maltese</option>
-    	            					</select>
+    	            					</select>';
+                                            }
+                                            else if($petBreeds[0] == "Pomeranian"){
+                                                echo '
+                                                <select>
+                                                    <option selected>'.$petBreeds[0].'</option>
+                                                    <option>Beagle</option>
+                                                    <option>Maltese</option>
+                                                </select>';
+                                            }
+                                            else if($petBreeds[0] == "Beagle"){
+                                                echo '
+                                                <select>
+                                                    <option selected>'.$petBreeds[0].'</option>
+                                                    <option>Pomeranian</option>
+                                                    <option>Maltese</option>
+                                                </select>';
+                                            }
+                                            else if($petBreeds[0] == "Maltese"){
+                                                echo '
+                                                <select>
+                                                    <option selected>'.$petBreeds[0].'</option>
+                                                    <option>Pomeranian</option>
+                                                    <option>Beagle</option>
+                                                </select>';
+                                            }
+                                        ?>
              						</div>
     									
     								<!--GENDER-->
     								<div class="styled-select inputIn">
+                                        <?php if($petGenders[0] == "") {
+                                            echo '
     	            					<select> 
     						            	<option value="" disabled selected>GENDER</option>
     						                <option>Male</option>
     						                <option>Female</option>
-    	            					</select>
+    	            					</select>';
+                                        }
+                                        else if($petGenders[0] == "Male") {
+                                            echo '
+                                        <select>
+                                            <option selected>'.$petGenders[0].'</option>
+                                            <option>Female</option>
+                                        </select>';
+                                        }
+                                        else if($petGenders[0] == "Female") {
+                                            echo '
+                                            <select>
+                                                <option selected>'.$petGenders[0].'</option>
+                                                <option>Male</option>
+                                            </select>';
+                                        }
+                                    ?>
              						</div>
     									
     								<!--AGE-->
-    								<input class = "input inputIn" type="number" placeholder="AGE (in years)" />
+    								<?php echo '<input class = "input inputIn" type="number" value="'.$petAges[0].' Years" placeholder="AGE (in years)" />'; ?>
     									
     								<!--WEIGHT-->
-    								<input class = "input inputIn" type="number" placeholder="WEIGHT (in lbs)" />
+    								<?php echo '<input class = "input inputIn" type="number" value="'.$petWeights[0].' Lbs" placeholder="WEIGHT (in lbs)" />'; ?>
     									
     								<!--FOOD BRAND-->
     								<div class="styled-select inputIn">
+                                        <?php if($petFoods[0] == "") {
+                                            echo '
                 						<select> 
     						                <option value="" disabled selected>FOOD BRAND</option>
     						                <option>All Brand</option>
@@ -160,20 +408,101 @@
     						                <option>Advance Pet Diets - Select Choice All Natural</option>
     						                <option>Alpo</option>
     						                <option>Annamaet</option>
-    				            		</select>
+    				            		</select>';
+                                        }
+                                        else if($petFoods[0] == "All Brand") {
+                                            echo '
+                                        <select> 
+                                            <option selected>All Brand</option>
+                                            <option>Acana</option>
+                                            <option>Advance Pet Diets - Select Choice All Natural</option>
+                                            <option>Alpo</option>
+                                            <option>Annamaet</option>
+                                        </select>';
+                                        }
+                                        else if($petFoods[0] == "Acana") {
+                                            echo '
+                                        <select> 
+                                            <option>All Brand</option>
+                                            <option selected>Acana</option>
+                                            <option>Advance Pet Diets - Select Choice All Natural</option>
+                                            <option>Alpo</option>
+                                            <option>Annamaet</option>
+                                        </select>';
+                                        }
+                                        else if($petFoods[0] == "Advance Pet Diets - Select Choice All Natural") {
+                                            echo '
+                                        <select> 
+                                            <option>All Brand</option>
+                                            <option>Acana</option>
+                                            <option selected>Advance Pet Diets - Select Choice All Natural</option>
+                                            <option>Alpo</option>
+                                            <option>Annamaet</option>
+                                        </select>';
+                                        }
+                                        else if($petFoods[0] == "Alpo") {
+                                            echo '
+                                        <select> 
+                                            <option>All Brand</option>
+                                            <option>Acana</option>
+                                            <option>Advance Pet Diets - Select Choice All Natural</option>
+                                            <option selected>Alpo</option>
+                                            <option>Annamaet</option>
+                                        </select>';
+                                        }
+                                        else if($petFoods[0] == "Annamaet") {
+                                            echo '
+                                        <select> 
+                                            <option>All Brand</option>
+                                            <option>Acana</option>
+                                            <option>Advance Pet Diets - Select Choice All Natural</option>
+                                            <option>Alpo</option>
+                                            <option selected>Annamaet</option>
+                                        </select>';
+                                        }
+                                    ?>
              						</div>
     									
     								<!--HEALTH-->
     								<div class="styled-select inputIn">
+                                    <?php if($petHealths[0] == "") {
+                                        echo '
                 						<select> 
     						                <option value="" disabled selected>HEALTH</option>
     						                <option>Overweight</option>
     						                <option>Underweight</option>
     						                <option>Healthy</option>
-    				            		</select>
+    				            		</select>';
+                                        }
+                                        else if($petHealths[0] == "Overweight") {
+                                            echo '
+                                        <select> 
+                                            <option selected>Overweight</option>
+                                            <option>Underweight</option>
+                                            <option>Healthy</option>
+                                        </select>';
+                                        }
+                                        else if($petHealths[0] == "Underweight") {
+                                            echo '
+                                        <select> 
+                                            <option>Overweight</option>
+                                            <option selected>Underweight</option>
+                                            <option>Healthy</option>
+                                        </select>';
+                                        }
+                                        else if($petHealths[0] == "Healthy") {
+                                            echo '
+                                        <select> 
+                                            <option>Overweight</option>
+                                            <option>Underweight</option>
+                                            <option selected>Healthy</option>
+                                        </select>';
+                                        }
+                                    ?>
              						</div>
-    									
-    							</div>
+    							 <button class="button" type="submit" name="petInfo" class="btn btn-default btn-small">UPDATE PET INFO</button>
+    							</form>
+                                </div>
                             </div>
 							
 							<div class="col-md-6">
@@ -261,6 +590,7 @@
         </div>
 
     </div>
+</form>
 
     <!-- JavaScript -->
     <script src="http://code.jquery.com/jquery.js"></script>
